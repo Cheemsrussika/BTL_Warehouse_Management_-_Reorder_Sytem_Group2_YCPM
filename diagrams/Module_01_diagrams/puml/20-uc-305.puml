@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-305: Record & Inspect Immutable Transaction Ledger" as UC_305
+}
+Inventory_Controller --> UC_305
+@enduml

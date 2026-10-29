@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Order Service" as Order_Service
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-302: Reserve Order Stock & Deduct ATP" as UC_302
+}
+Order_Service --> UC_302
+@enduml

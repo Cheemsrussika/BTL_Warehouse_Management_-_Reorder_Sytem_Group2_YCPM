@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "System Scheduler / Timer" as System_Scheduler___Timer
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-403: Execute Automated Replenishment Cycle" as UC_403
+}
+System_Scheduler___Timer --> UC_403
+@enduml

@@ -1,0 +1,69 @@
+@startuml
+left to right direction
+actor "Warehouse Staff" as ACT_01
+actor "Inventory Controller" as ACT_02
+actor "Warehouse Manager" as ACT_03
+actor "IT Administrator" as ACT_04
+actor "Supplier" as ACT_05
+actor "System Scheduler / Timer" as ACT_06
+actor "System User" as ACT_07
+actor "Order Service" as ACT_08
+rectangle System {
+  usecase "User Login and Authentication" as UC_101
+  usecase "Provision User Account and Manage Lifecycle" as UC_102
+  usecase "Review System Audit Logs" as UC_103
+  usecase "Manage Product and Supplier Catalog" as UC_104
+  usecase "Configure SKU Inventory Parameters" as UC_105
+  usecase "Manage Warehouse Storage Hierarchy" as UC_106
+  usecase "Display item image icons in catalog and search" as UC_107
+  usecase "Receive Goods" as UC_201
+  usecase "Issue Goods" as UC_202
+  usecase "Scan and Count Goods" as UC_203
+  usecase "Handle Returned Goods" as UC_204
+  usecase "Transfer Between Bins" as UC_205
+  usecase "Validate a Transfer" as UC_206
+  usecase "Recommend FIFO Batches" as UC_207
+  usecase "Recommend FEFO Batches" as UC_208
+  usecase "Initialize & Query Real-Time Stock Balances" as UC_301
+  usecase "Reserve Order Stock & Deduct ATP" as UC_302
+  usecase "Execute Reason-Based Stock Adjustment" as UC_303
+  usecase "Verify Idempotent Adjustment Request" as UC_304
+  usecase "Record & Inspect Immutable Transaction Ledger" as UC_305
+  usecase "Generate Blind Cycle Count Sheet" as UC_306
+  usecase "Submit Physical Count & Compute Discrepancy" as UC_307
+  usecase "Reconcile Count Variance by Threshold" as UC_308
+  usecase "Configure SKU Replenishment Policy" as UC_401
+  usecase "Monitor Low-Stock Alerts and Dashboard" as UC_402
+  usecase "Execute Automated Replenishment Cycle" as UC_403
+  usecase "Review Reorder Suggestions and Create Purchase Orders" as UC_404
+  usecase "Adjust or Dismiss a Reorder Suggestion" as UC_405
+}
+ACT_01 --> UC_101
+ACT_04 --> UC_102
+ACT_03 --> UC_103
+ACT_02 --> UC_104
+ACT_02 --> UC_105
+ACT_03 --> UC_106
+ACT_02 --> UC_107
+ACT_01 --> UC_201
+ACT_01 --> UC_202
+ACT_01 --> UC_203
+ACT_01 --> UC_204
+ACT_01 --> UC_205
+ACT_02 --> UC_206
+ACT_02 --> UC_207
+ACT_02 --> UC_208
+ACT_08 --> UC_301
+ACT_08 --> UC_302
+ACT_02 --> UC_303
+ACT_02 --> UC_304
+ACT_02 --> UC_305
+ACT_02 --> UC_306
+ACT_01 --> UC_307
+ACT_02 --> UC_308
+ACT_02 --> UC_401
+ACT_02 --> UC_402
+ACT_06 --> UC_403
+ACT_02 --> UC_404
+ACT_02 --> UC_405
+@enduml

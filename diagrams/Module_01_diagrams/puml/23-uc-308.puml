@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-308: Reconcile Count Variance by Threshold" as UC_308
+}
+Inventory_Controller --> UC_308
+@enduml

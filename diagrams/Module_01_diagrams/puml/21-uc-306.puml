@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-306: Generate Blind Cycle Count Sheet" as UC_306
+}
+Inventory_Controller --> UC_306
+@enduml

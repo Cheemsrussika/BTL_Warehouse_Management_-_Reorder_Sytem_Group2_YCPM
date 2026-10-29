@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Warehouse Manager" as Warehouse_Manager
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-103: Review System Audit Logs" as UC_103
+}
+Warehouse_Manager --> UC_103
+@enduml

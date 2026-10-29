@@ -1,0 +1,115 @@
+digraph WrHM_DFD_Level1 {
+  graph [
+    label="WrHM — Data Flow Diagram, Level 1",
+    labelloc=t,
+    fontsize=22,
+    fontname="DejaVu Sans",
+    rankdir=LR,
+    splines=polyline,
+    nodesep=0.34,
+    ranksep=0.85,
+    pad=0.22,
+    margin=0,
+    bgcolor="white",
+    dpi=180,
+    size="8.2,10.2",
+    ratio=compress
+  ];
+
+  node [
+    fontname="DejaVu Sans",
+    fontsize=15,
+    color="#365F91",
+    penwidth=1.4,
+    margin="0.12,0.08"
+  ];
+  edge [
+    fontname="DejaVu Sans",
+    fontsize=11,
+    color="#526579",
+    fontcolor="#243F60",
+    arrowsize=0.7,
+    penwidth=1.1
+  ];
+
+  // External entities
+  staff [label="Warehouse Staff", shape=box, style="rounded,filled", fillcolor="#F4F7FB"];
+  controller [label="Inventory Controller", shape=box, style="rounded,filled", fillcolor="#F4F7FB"];
+  manager [label="Warehouse Manager", shape=box, style="rounded,filled", fillcolor="#F4F7FB"];
+  admin [label="IT Administrator", shape=box, style="rounded,filled", fillcolor="#F4F7FB"];
+  supplier [label="Supplier", shape=box, style="rounded,filled", fillcolor="#F4F7FB"];
+  scheduler [label="System Scheduler / Timer", shape=box, style="rounded,filled", fillcolor="#F4F7FB"];
+  order_service [label="Order Service", shape=box, style="rounded,filled", fillcolor="#F4F7FB"];
+
+  // System processes
+  p1 [label="1.0\nManage access and master data\n(FR-101–107)", shape=ellipse, style=filled, fillcolor="#DCEAF7"];
+  p2 [label="2.0\nProcess stock movements\nand cycle counts\n(FR-201–308)", shape=ellipse, style=filled, fillcolor="#DCEAF7"];
+  p3 [label="3.0\nMonitor stock, replenish\nand create draft orders\n(FR-401–405)", shape=ellipse, style=filled, fillcolor="#DCEAF7"];
+  p4 [label="4.0\nProvide audit views\nand inventory reports\n(FR-103, FR-305)", shape=ellipse, style=filled, fillcolor="#DCEAF7"];
+
+  // Logical data stores
+  d1 [label="D1  Users and roles", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+  d2 [label="D2  Product, supplier\nand location master", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+  d3 [label="D3  Stock balances\nand lot records", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+  d4 [label="D4  Stock transaction\nledger", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+  d5 [label="D5  Cycle-count sessions", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+  d6 [label="D6  Replenishment policies\nand suggestions", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+  d7 [label="D7  Purchase orders", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+  d8 [label="D8  Audit log", shape=box, peripheries=2, style=filled, fillcolor="#FFF8E7"];
+
+  // Arrange entities, processes and stores as three DFD lanes.
+  { rank=same; admin; controller; staff; order_service; scheduler; supplier; manager; }
+  { rank=same; p1; p2; p3; p4; }
+  { rank=same; d1; d2; d3; d4; d5; d6; d7; d8; }
+  admin -> controller -> staff -> order_service -> scheduler -> supplier -> manager
+    [style=invis, weight=100];
+  p1 -> p2 -> p3 -> p4 [style=invis, weight=100];
+  d1 -> d2 -> d3 -> d4 -> d5 -> d6 -> d7 -> d8
+    [style=invis, weight=100];
+
+  // User access and master-data administration
+  staff -> p1 [label="credentials"];
+  p1 -> staff [label="session / access result"];
+  controller -> p1 [label="catalog / policy changes"];
+  p1 -> controller [label="validation results"];
+  admin -> p1 [label="account / role changes"];
+  p1 -> admin [label="account status"];
+  p1 -> d1 [dir=both, label="user / role data"];
+  p1 -> d2 [dir=both, label="master data"];
+  p1 -> d6 [label="replenishment policies"];
+  p1 -> d8 [label="account events"];
+
+  // Receiving, issuing, returns, transfers, adjustments, reservations and counts
+  staff -> p2 [label="stock movements / counts"];
+  p2 -> staff [label="confirmation / count sheet"];
+  controller -> p2 [label="variance review"];
+  p2 -> controller [label="reconciliation result"];
+  order_service -> p2 [label="reservation request"];
+  p2 -> order_service [label="allocation result"];
+  d2 -> p2 [label="SKU / bin references"];
+  p2 -> d3 [dir=both, label="stock / lot balances"];
+  p2 -> d4 [label="stock transactions"];
+  p2 -> d5 [dir=both, label="count sessions"];
+  p2 -> d8 [label="transaction events"];
+
+  // Monitoring, suggestions and purchase orders
+  scheduler -> p3 [label="scheduled cycle"];
+  controller -> p3 [label="reorder decisions"];
+  p3 -> controller [label="alerts / suggestions"];
+  d2 -> p3 [label="supplier / price data"];
+  d3 -> p3 [label="available stock"];
+  p3 -> d6 [dir=both, label="suggestions"];
+  p3 -> d7 [label="draft purchase orders"];
+  p3 -> supplier [label="purchase-order details"];
+  p3 -> d8 [label="replenishment events"];
+
+  // Read-only audit review and inventory reporting
+  manager -> p4 [label="inventory report request"];
+  p4 -> manager [label="inventory reports"];
+  admin -> p4 [label="audit query"];
+  p4 -> admin [label="audit records"];
+  d3 -> p4 [label="stock balances"];
+  d4 -> p4 [label="transaction history"];
+  d7 -> p4 [label="purchase-order data"];
+  d8 -> p4 [label="audit events"];
+}

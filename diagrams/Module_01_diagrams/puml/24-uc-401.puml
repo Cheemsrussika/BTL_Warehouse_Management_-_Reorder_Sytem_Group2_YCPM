@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-401: Configure SKU Replenishment Policy" as UC_401
+}
+Inventory_Controller --> UC_401
+@enduml

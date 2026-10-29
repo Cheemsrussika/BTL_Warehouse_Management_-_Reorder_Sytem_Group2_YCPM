@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Warehouse Staff" as Warehouse_Staff
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-101: User Login and Authentication" as UC_101
+}
+Warehouse_Staff --> UC_101
+@enduml

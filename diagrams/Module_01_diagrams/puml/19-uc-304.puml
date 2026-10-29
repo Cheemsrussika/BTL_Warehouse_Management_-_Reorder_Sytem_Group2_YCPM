@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-304: Verify Idempotent Adjustment Request" as UC_304
+}
+Inventory_Controller --> UC_304
+@enduml

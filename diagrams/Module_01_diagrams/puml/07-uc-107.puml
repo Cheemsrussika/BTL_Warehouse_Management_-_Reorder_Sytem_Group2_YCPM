@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-107: Display item image icons in catalog and search" as UC_107
+}
+Inventory_Controller --> UC_107
+@enduml

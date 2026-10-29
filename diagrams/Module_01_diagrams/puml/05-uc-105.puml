@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-105: Configure SKU Inventory Parameters" as UC_105
+}
+Inventory_Controller --> UC_105
+@enduml

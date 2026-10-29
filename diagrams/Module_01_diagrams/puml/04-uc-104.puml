@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-104: Manage Product and Supplier Catalog" as UC_104
+}
+Inventory_Controller --> UC_104
+@enduml

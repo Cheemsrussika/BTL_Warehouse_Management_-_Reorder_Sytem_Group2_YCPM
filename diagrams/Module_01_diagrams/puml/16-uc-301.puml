@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Order Service" as Order_Service
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-301: Initialize & Query Real-Time Stock Balances" as UC_301
+}
+Order_Service --> UC_301
+@enduml

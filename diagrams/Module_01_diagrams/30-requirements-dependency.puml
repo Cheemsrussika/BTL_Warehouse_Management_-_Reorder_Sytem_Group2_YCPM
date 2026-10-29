@@ -1,0 +1,80 @@
+@startuml
+skinparam rectangle {
+  BackgroundColor<<Must>> #FFDDDD
+  BackgroundColor<<Should>> #FFF3CD
+  BackgroundColor<<Could>> #DDEEFF
+}
+rectangle "FR-101: Account provisioning and login" as FR_101 <<Must>>
+rectangle "FR-102: Role-based access control (RBAC)" as FR_102 <<Must>>
+rectangle "FR-103: Audit Trail & Compliance Logging" as FR_103 <<Should>>
+rectangle "FR-104: Manage product and supplier catalog" as FR_104 <<Must>>
+rectangle "FR-105: Review and update SKU master data" as FR_105 <<Must>>
+rectangle "FR-106: Bin and location hierarchy management" as FR_106 <<Must>>
+rectangle "FR-107: Item image icons in the stock list and search results" as FR_107 <<Could>>
+rectangle "FR-201: Create Draft Goods Receipt" as FR_201 <<Must>>
+rectangle "FR-202: Confirm Goods Receipt" as FR_202 <<Must>>
+rectangle "FR-203: Create Goods Issue Note" as FR_203 <<Must>>
+rectangle "FR-204: Confirm Goods Issue" as FR_204 <<Must>>
+rectangle "FR-205: Identify Product by QR/Barcode" as FR_205 <<Must>>
+rectangle "FR-206: Count Goods by Scanning" as FR_206 <<Must>>
+rectangle "FR-207: Create Return Note" as FR_207 <<Must>>
+rectangle "FR-208: Classify Returned Goods" as FR_208 <<Must>>
+rectangle "FR-209: Create Bin Transfer Note" as FR_209 <<Must>>
+rectangle "FR-210: Confirm Bin Transfer" as FR_210 <<Must>>
+rectangle "FR-211: Validate Transfer Stock and Capacity" as FR_211 <<Must>>
+rectangle "FR-212: Check Transfer Permission" as FR_212 <<Must>>
+rectangle "FR-213: Recommend FIFO Batch" as FR_213 <<Should>>
+rectangle "FR-214: Allocate FIFO Stock" as FR_214 <<Should>>
+rectangle "FR-215: Recommend FEFO Batch" as FR_215 <<Should>>
+rectangle "FR-216: Allocate FEFO Stock" as FR_216 <<Should>>
+rectangle "FR-301: Real-Time Stock Visibility" as FR_301 <<Must>>
+rectangle "FR-302: Order Stock Reservation" as FR_302 <<Must>>
+rectangle "FR-303: Reason-Based Stock Adjustment" as FR_303 <<Must>>
+rectangle "FR-304: Duplicate Transaction Prevention" as FR_304 <<Must>>
+rectangle "FR-305: Stock Transaction History" as FR_305 <<Should>>
+rectangle "FR-306: Blind Count Sheet Generation" as FR_306 <<Must>>
+rectangle "FR-307: Count Submission & Discrepancy Calculation" as FR_307 <<Must>>
+rectangle "FR-308: Threshold-Based Count Reconciliation" as FR_308 <<Must>>
+rectangle "FR-401: Configure SKU replenishment policy" as FR_401 <<Must>>
+rectangle "FR-402: Monitor available stock against the reorder point" as FR_402 <<Must>>
+rectangle "FR-403: Execute the automated replenishment cycle" as FR_403 <<Must>>
+rectangle "FR-404: Calculate the suggested order quantity from safety stock, lead time and MOQ" as FR_404 <<Must>>
+rectangle "FR-405: Review reorder suggestions and create purchase orders" as FR_405 <<Must>>
+FR_101 --> FR_102 : depends on
+FR_101 --> FR_103 : depends on
+FR_101 --> FR_104 : depends on
+FR_101 --> FR_105 : depends on
+FR_104 --> FR_105 : depends on
+FR_107 --> FR_105 : depends on
+FR_101 --> FR_106 : depends on
+FR_104 --> FR_107 : depends on
+FR_201 --> FR_202 : depends on
+FR_203 --> FR_204 : depends on
+FR_205 --> FR_206 : depends on
+FR_207 --> FR_208 : depends on
+FR_209 --> FR_210 : depends on
+FR_211 --> FR_210 : depends on
+FR_212 --> FR_210 : depends on
+FR_209 --> FR_211 : depends on
+FR_209 --> FR_212 : depends on
+FR_213 --> FR_214 : depends on
+FR_215 --> FR_216 : depends on
+FR_104 --> FR_301 : depends on
+FR_104 --> FR_302 : depends on
+FR_105 --> FR_302 : depends on
+FR_301 --> FR_303 : depends on
+FR_303 --> FR_304 : depends on
+FR_303 --> FR_305 : depends on
+FR_106 --> FR_306 : depends on
+FR_306 --> FR_307 : depends on
+FR_307 --> FR_308 : depends on
+FR_104 --> FR_401 : depends on
+FR_105 --> FR_401 : depends on
+FR_401 --> FR_402 : depends on
+FR_401 --> FR_403 : depends on
+FR_402 --> FR_403 : depends on
+FR_401 --> FR_404 : depends on
+FR_403 --> FR_404 : depends on
+FR_404 --> FR_405 : depends on
+FR_104 --> FR_405 : depends on
+@enduml

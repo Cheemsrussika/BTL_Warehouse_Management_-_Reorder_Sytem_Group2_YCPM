@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Warehouse Staff" as Warehouse_Staff
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-307: Submit Physical Count & Compute Discrepancy" as UC_307
+}
+Warehouse_Staff --> UC_307
+@enduml

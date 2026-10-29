@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "IT Administrator" as IT_Administrator
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-102: Provision User Account and Manage Lifecycle" as UC_102
+}
+IT_Administrator --> UC_102
+@enduml

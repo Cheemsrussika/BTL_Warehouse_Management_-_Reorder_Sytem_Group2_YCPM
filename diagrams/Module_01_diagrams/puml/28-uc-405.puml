@@ -1,0 +1,8 @@
+@startuml
+left to right direction
+actor "Inventory Controller" as Inventory_Controller
+rectangle "Warehouse Inventory & Reorder System (WrHM)" {
+  usecase "UC-405: Adjust or Dismiss a Reorder Suggestion" as UC_405
+}
+Inventory_Controller --> UC_405
+@enduml
