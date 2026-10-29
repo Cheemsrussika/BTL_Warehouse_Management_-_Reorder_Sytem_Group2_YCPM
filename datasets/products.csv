@@ -1,0 +1,5 @@
+sku_code,barcode,name,uom,rop,moq,default_bin,image_url,is_perishable,shelf_life_days,stock_on_hand,status
+SKU-WIDGET-01,8931234567890,Industrial Widget A,EA,10,5,Z1-A01-R01-S1-B01,widget01.png,False,0,20,ACTIVE
+SKU-WIDGET-02,8931234567891,Industrial Widget B,EA,10,5,Z1-A01-R01-S1-B02,widget02.png,False,0,0,ACTIVE
+SKU-NO-IMG-01,8931234567999,Plain Item,EA,5,1,Z1-A01-R01-S1-B03,,False,0,15,ACTIVE
+SKU-WIDGET-03,8931234567892,Industrial Widget C,EA,10,5,Z1-A01-R01-S1-B04,widget03.png,False,0,40,ACTIVE

@@ -1,0 +1,136 @@
+{
+  "users": [
+    {
+      "user_id": "U-ADM",
+      "email": "admin@wrhm.vn",
+      "role": "IT_ADMIN",
+      "is_active": true,
+      "password": "AdminPass123!"
+    },
+    {
+      "user_id": "U-MGR",
+      "email": "manager@wrhm.vn",
+      "role": "WAREHOUSE_MANAGER",
+      "is_active": true,
+      "password": "ManagerPass123!"
+    },
+    {
+      "user_id": "U-STA",
+      "email": "staff01@wrhm.vn",
+      "role": "WAREHOUSE_STAFF",
+      "is_active": true,
+      "password": "StaffPass123!"
+    },
+    {
+      "user_id": "U-CTL",
+      "email": "controller@wrhm.vn",
+      "role": "INVENTORY_CONTROLLER",
+      "is_active": true,
+      "password": "ControllerPass123!"
+    }
+  ],
+  "skus": [
+    {
+      "sku_code": "SKU-WIDGET-01",
+      "barcode": "8931234567890",
+      "name": "Industrial Widget A",
+      "uom": "EA",
+      "rop": 10,
+      "moq": 5,
+      "default_bin": "Z1-A01-R01-S1-B01",
+      "image_url": "widget01.png",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "stock_on_hand": 20,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-WIDGET-02",
+      "barcode": "8931234567891",
+      "name": "Industrial Widget B",
+      "uom": "EA",
+      "rop": 10,
+      "moq": 5,
+      "default_bin": "Z1-A01-R01-S1-B02",
+      "image_url": "widget02.png",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "stock_on_hand": 0,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-NO-IMG-01",
+      "barcode": "8931234567999",
+      "name": "Plain Item",
+      "uom": "EA",
+      "rop": 5,
+      "moq": 1,
+      "default_bin": "Z1-A01-R01-S1-B03",
+      "image_url": "",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "stock_on_hand": 15,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-WIDGET-03",
+      "barcode": "8931234567892",
+      "name": "Industrial Widget C",
+      "uom": "EA",
+      "rop": 10,
+      "moq": 5,
+      "default_bin": "Z1-A01-R01-S1-B04",
+      "image_url": "widget03.png",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "stock_on_hand": 40,
+      "status": "ACTIVE"
+    }
+  ],
+  "storage_bins": [
+    {
+      "bin_code": "Z1-A01-R01-S1-B01",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B01",
+      "capacity": 50,
+      "on_hand": 20,
+      "active": true
+    },
+    {
+      "bin_code": "Z1-A01-R01-S1-B02",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B02",
+      "capacity": 50,
+      "on_hand": 0,
+      "active": true
+    },
+    {
+      "bin_code": "Z1-A01-R01-S1-B03",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B03",
+      "capacity": 50,
+      "on_hand": 15,
+      "active": true
+    },
+    {
+      "bin_code": "Z1-A01-R01-S1-B04",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B04",
+      "capacity": 50,
+      "on_hand": 40,
+      "active": true
+    }
+  ]
+}

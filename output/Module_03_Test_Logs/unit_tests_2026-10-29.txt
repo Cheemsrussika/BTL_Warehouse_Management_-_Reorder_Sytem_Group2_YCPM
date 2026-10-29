@@ -1,0 +1,33 @@
+MODULE 3 TEST RUN
+Started: 2026-10-29T14:57:09+07:00
+Command: /home/quang/Videos/Warehouse_Inventory_Reorder_System/.venv/bin/python -m pytest -v -s src/Module3/test_warehouse_inventory.py --junitxml=/home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_03_Test_Logs/test_run_2026-10-29.xml
+Working directory: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send
+------------------------------------------------------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/quang/Videos/Warehouse_Inventory_Reorder_System/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send
+collecting ... collected 15 items
+
+src/Module3/test_warehouse_inventory.py::test_tc_301_verify_initialize_and_query_stock PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_302_verify_allocate_stock_and_deduct_atp PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_303_verify_record_stock_adjustments_with_reason_codes PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_304_verify_enforce_transaction_idempotency_on_duplicate_request PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_305_verify_append_only_immutable_transaction_ledger_record PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_306_verify_create_blind_count_and_mask_system_quantity PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_307_verify_submit_physical_count_and_calculate_variance PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_308_verify_auto_reconcile_or_hold_based_on_threshold PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_309_verify_real_time_atp_query_and_allocation_latency PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_310_verify_concurrency_locking_prevents_negative_atp PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_311_verify_idempotency_key_retention_and_fast_lookup PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_312_verify_immutable_audit_ledger_blocks_update_and_delete PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_313_verify_backend_blind_count_serializer_strips_expected_qty PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_314_verify_supervisor_review_and_rejection_of_high_variance_session PASSED
+src/Module3/test_warehouse_inventory.py::test_tc_315_verify_rejection_of_zero_quantity_adjustment PASSED
+
+- generated xml file: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_03_Test_Logs/test_run_2026-10-29.xml -
+============================== 15 passed in 0.04s ==============================
+
+Exit code: 0
+Log: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_03_Test_Logs/unit_tests_2026-10-29.txt
+JUnit: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_03_Test_Logs/test_run_2026-10-29.xml

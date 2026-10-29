@@ -1,0 +1,70 @@
+MODULE 1 TEST RUN
+Started: 2026-10-29T14:57:09+07:00
+Command: /home/quang/Videos/Warehouse_Inventory_Reorder_System/.venv/bin/python -m pytest -v -s src/Module1/Test/test_module1.py --junitxml=/home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_01_Test_Logs/test_run_2026-10-29.xml
+Working directory: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send
+------------------------------------------------------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/quang/Videos/Warehouse_Inventory_Reorder_System/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send
+collecting ... collected 13 items
+
+src/Module1/Test/test_module1.py::test_tc101_valid_login 
+[INFO] TC-101: Authenticating user staff01@wrhm.vn...
+[INFO] TC-101: Latency measured: 0.0000s (Target <= 2.0s) -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc102_invalid_credentials 
+[INFO] TC-102: Attempting invalid login for staff01@wrhm.vn...
+[INFO] TC-102: Attempting invalid login; caught ValueError('Invalid credentials') -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc103_rbac_unauthorized_access 
+[INFO] TC-103: Staff attempting admin user provisioning...
+[INFO] TC-103: Staff attempting admin user provisioning; caught PermissionError(403 Forbidden / PermissionError) -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc104_provision_user_creates_audit 
+[INFO] TC-104: Admin provisioning controller01@wrhm.vn...
+[INFO] TC-104: Admin provisioned controller01@wrhm.vn; verified immutable PROVISION_USER log entry by admin@wrhm.vn -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc105_duplicate_barcode_rejection 
+[INFO] TC-105: Attempted duplicate barcode '8931234567890'...
+[INFO] TC-105: Attempted duplicate barcode '8931234567890'; caught ValueError('Duplicate barcode') -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc107_inventory_parameters_boundary 
+[INFO] TC-107: Setting ROP=-5, MOQ=0...
+[INFO] TC-107: Setting ROP=-5, MOQ=0; caught ValueError('ROP must be >= 0') -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc108_storage_hierarchy_duplicate_coord 
+[INFO] TC-108: Attempted duplicate bin coordinate 'Z1-A01-R01-S1-B01'...
+[INFO] TC-108: Attempted duplicate bin coordinate 'Z1-A01-R01-S1-B01'; caught ValueError('Duplicate coordinate') -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc109_deactivate_user_blocks_login 
+[INFO] TC-109: Deactivated user staff01@wrhm.vn...
+[INFO] TC-109: Deactivated user; verified is_active=False, DEACTIVATE_USER audit entry, login rejected -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc110_archive_sku_with_stock_blocked 
+[INFO] TC-110: Attempted archiving SKU with on_hand=20...
+[INFO] TC-110: Attempted archiving SKU with on_hand=20; caught ValueError('Cannot archive SKU with stock > 0 (on hand: 20). Deplete or write off the balance first.') -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc111_tracking_flags_persisted 
+[INFO] TC-111: Registering SKU-BATCH-01 with both tracking flags enabled...
+[INFO] TC-111: Verified requires_batch=True and requires_expiry=True persistence -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc112_bin_capacity_positive_and_free_derived 
+[INFO] TC-112: Reading bin Z1-A01-R01-S1-B04 (capacity 50, on hand 40)...
+[INFO] TC-112: Capacity 50 saved (free=10); capacity 0 rejected -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc113_audit_log_append_only 
+[INFO] TC-113: Attempting mutation/deletion of audit logs...
+[INFO] TC-113: Attempted mutation/deletion of audit logs; caught PermissionError -> PASSED
+PASSED
+src/Module1/Test/test_module1.py::test_tc114_thumbnail_placeholder_fallback 
+[INFO] TC-114: Querying SKU-NO-IMG-01 (no image URL)...
+[INFO] TC-114: SKU-NO-IMG-01 queried; verified placeholder 'placeholder-thumbnail.svg' fallback -> PASSED
+PASSED
+
+- generated xml file: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_01_Test_Logs/test_run_2026-10-29.xml -
+============================== 13 passed in 0.03s ==============================
+
+Exit code: 0
+Log: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_01_Test_Logs/unit_tests_2026-10-29.txt
+JUnit: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_01_Test_Logs/test_run_2026-10-29.xml

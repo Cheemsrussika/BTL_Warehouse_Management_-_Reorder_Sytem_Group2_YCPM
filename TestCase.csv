@@ -1,0 +1,259 @@
+id,title,related_requirements,type,priority,preconditions,steps,expected_result,status,actual_result,executed_by,executed_date,,,,
+TC-101,Valid User Authentication,FR-101,NFR-101,Functional,High,An active account exists for staff01@wrhm.vn with password StaffPass123!,"1.Access the application login interface.   
+2.Input email  staff01@wrhm.vn  and password StaffPass123!.   
+3.Click the ""Login"" button. ","System grants access within 2 seconds, generates an active authenticated session token,
+ and redirects the user to the operational dashboard.",Passed,Latency measured: 0.0000s (Target <= 2.0s),Quang Anh,2026-10-21,,,
+TC-102,Rejection of login attempt with incorrect credentials,FR-101,Functional,High,An active account exists for  staff01@wrhm.vn  with password StaffPass123!,"1a.Input registered email staff01@wrhm.vn and incorrect password.
+1b.Input unregistered email ghost_user@wrhm.vn and a random password or the correct password.
+2.Submit login request.","The system rejects authentication within 2 seconds, returns an identical generic error (""Invalid credentials""), issues no session token, and prevents account enumeration.",Passed,Attempting invalid login, caught ValueError('Invalid credentials'),Quang Anh,2026-10-21,,,
+TC-103,Verify unauthorized operational users cannot perform administrative actions,FR-102,NFR-102,Functional,High,User staff01@wrhm.vn is logged in with role Warehouse Staff (ACT-01),1.Attempt to invoke the user provisioning service or access administrative user management endpoints (POST /api/v1/users),System rejects execution with an explicit permission error (HTTP 403 Forbidden) and logs an unauthorized access attempt. ,Passed,Staff attempting admin user provisioning, caught PermissionError(403 Forbidden / PermissionError),Quang Anh,2026-10-21,,
+TC-104,Verify user provisioning by administrator creates immutable audit record,FR-101,FR-102,FR-103,Functional,Medium,User admin@wrhm.vn is authenticated with role IT Administrator (ACT-06),"1.Submit a user creation request with username controller01@wrhm.vn, temporary password TempSecret#2026, and role Inventory Controller. 
+2.Inspect the audit log storage for new entries","User account is created successfully; an immutable audit record is appended containing timestamp, executor ID (admin@wrhm.vn), target user, and action PROVISION_USER",Passed,Admin provisioned controller01@wrhm.vn, verified immutable PROVISION_USER log entry by admin@wrhm.vn,Quang Anh,2026-10-21,
+TC-105,System prevents registering duplicate barcodes across SKUs,FR-104,NFR-103,Functional,High,"-User is logged in as Inventory Controller (ACT-02)
+-SKU: SKU-WIDGET-01 already exists with barcode 8931234567890","1.Open product registration form.   
+2.Enter SKU code SKU-WIDGET-02, name ""Industrial Widget B"", and barcode 8931234567890.   3.Submit product creation form.",System rejects submission with a duplicate barcode error, duplicate record is not added to catalog.,Passed,Attempted duplicate barcode '8931234567890', caught ValueError('Duplicate barcode'),Quang Anh,2026-10-21,
+TC-107,Verify system rejects negative values for Reorder Point and non-positive MOQ ,FR-105,Functional,High,"-User is logged in as Inventory Controller (ACT-02)
+-SKU: SKU-WIDGET-02 exists","1.Open SKU parameter configuration view for SKU-WIDGET-02.   
+2.Set Reorder Point (ROP) to -5 and Minimum Order Quantity (MOQ) to 0.   
+3.Submit parameter changes",System rejects changes with a validation error stating ROP must be >= 0 and MOQ must be >= 0,Passed,"Setting ROP=-5, MOQ=0; caught ValueError('ROP must be >= 0')",Quang Anh,2026-10-21,,,,
+TC-108,Storage Hierarchy Duplicate Coordinate Validation,FR-106,Functional,High,"-User is logged in as Warehouse Manager (ACT-03)
+-Storage bin Z1-A01-R01-S1-B01 already exists","1.Navigate to Storage Hierarchy Management.   
+2.Attempt to add a new bin with duplicate coordinate code Z1-A01-R01-S1-B01.   
+3.Submit bin creation form.",System blocks bin creation and prompts a coordinate conflict error. ,Passed,Attempted duplicate bin coordinate 'Z1-A01-R01-S1-B01', caught ValueError('Duplicate coordinate'),Quang Anh,2026-10-21,,,
+TC-109,Verify deactivation of user account and subsequent login rejection,FR-101,FR-102,FR-103,Functional,Medium,"-User staff01@wrhm.vn is active
+-Administrator admin@wrhm.vn is logged in","1.The administrator executes account deactivation on staff01@wrhm.vn.
+2.Inspect the user status and the audit log entries.
+3.Attempt login as staff01@wrhm.vn with the valid password StaffPass123!.",User status is set to is_active = false, a DEACTIVATE_USER audit entry is recorded, the login attempt is rejected with an account-suspended error and no session token is issued.,Passed,"Deactivated user; verified is_active=False, DEACTIVATE_USER audit entry, login rejected",Quang Anh,2026-10-21
+TC-110,Verify system prevents archiving a SKU with active on-hand inventory,FR-104,Functional,High,"-User is logged in as Inventory Controller (ACT-02)
+-SKU SKU-WIDGET-01 has 20 units of on-hand inventory","1.Open Catalog Management and select SKU-WIDGET-01.
+2.Trigger Archive SKU and confirm the operation.",System blocks the operation and reports that a SKU with active on-hand inventory cannot be archived, the SKU status remains ACTIVE.,Passed,Attempted archiving SKU with on_hand=20, caught ValueError('Cannot archive SKU with stock > 0 (on hand: 20). Deplete or write off the balance first.'),Quang Anh,2026-10-21,,
+TC-111,Product tracking flags are persisted,FR-104,Functional,Medium,"-User is logged in as Inventory Controller (ACT-02)
+-Catalog Management view is reachable","1.Open the product registration form.
+2.Enter SKU code SKU-BATCH-01, name ""Sterile Kit"", barcode 8931234567899, and set requires_batch = true and requires_expiry = true.
+3.Submit the form, then reopen the saved SKU record.",SKU is saved with requires_batch = true and requires_expiry = true, both flags are shown unchanged when the record is reopened.,Passed,Verified requires_batch=True and requires_expiry=True persistence,Quang Anh,2026-10-21,,,
+TC-112,Bin capacity is a positive integer with derived free capacity,FR-106,Functional,Medium,"-User is logged in as Warehouse Manager (ACT-03)
+-Bin Z1-A01-R01-S1-B01 exists with 40 units on hand","1.Open the properties of bin Z1-A01-R01-S1-B01.
+2.Set capacity to 50 and save.
+3.Set capacity to 0 and save.",Capacity 50 is saved and free capacity is displayed as 10 units, capacity 0 is rejected and the stored value remains 50.,Passed,Capacity 50 saved (free=10), capacity 0 rejected,Quang Anh,2026-10-21,,
+TC-113,Audit log entries are append-only,FR-103,NFR-104,Functional,High,"-User is logged in as IT Administrator (ACT-04)
+-At least one audit entry exists from a prior configuration change","1.Open the audit log viewer as a privileged user.
+2.Attempt to change the message or timestamp of an existing audit entry.
+3.Attempt to delete the same audit entry.",Both update and delete operations are rejected, the audit entry remains unchanged and the rejection is itself recorded.,Passed,Attempted mutation/deletion of audit logs, caught PermissionError,Quang Anh,2026-10-21,
+TC-114,Item Image Placeholder Fallback Display,FR-107,Functional,Low,An active SKU: SKU-NO-IMG-01 exists without an associated image file. ,"1.Execute a catalog search query matching SKU-NO-IMG-01.   
+2.Inspect the rendered item list entry.   ",System displays the default generic placeholder icon alongside item details within the result set.,Passed,SKU-NO-IMG-01 queried, verified placeholder 'placeholder-thumbnail.svg' fallback,Quang Anh,2026-10-21,,,
+TC-201,Create a Valid Receipt,FR-201,Functional,Must,"Warehouse staff can access receiving; PO-1001, SKU001 and A-01 are active.","1. Open Goods Receiving.
+2. Select PO-1001 and enter SKU001, LOT-TEST, quantity 5 and A-01.
+3. Enter the expiry date 2027-12-31, then click Save.
+4. Reopen the saved draft and check its fields and stock.","A draft receipt is saved with the entered SKU, lot and expiry; warehouse stock does not change.",Passed,"Local Python demo: Saved DRAFT for PO-1001 / SKU001 / LOT-TEST; stock remains 0 for the draft lot.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-202,Confirm a Receipt,FR-202,NFR-202,Functional,Must,A valid draft receipt has been saved, it has not been confirmed.,"
+1. Open a valid receipt linked to a purchase order.
+2. Check the quantity and click Confirm.
+3. Review the quantity after confirmation.",The receipt is confirmed and the incoming quantity is recorded once.,Passed,"Local Python demo: Confirmed receipt added exactly 5 units of LOT-TEST.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,
+TC-203,Reject Excess Receiving,FR-202,Functional,Must,PO-1001 allows at most 100 more units, no receipt has been confirmed.,"
+1. Choose a receipt linked to a purchase order.
+2. Enter a quantity greater than the remaining ordered quantity.
+3. Click Confirm.",The system shows an error and does not confirm the receipt.,Passed,"Local Python demo: 101 units exceeded 100 outstanding on PO-1001; rejected at draft creation before confirmation.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-204,Create a Valid Issue Note,FR-203,Functional,Must,SKU001 exists and warehouse staff can create issue notes.,"
+1. Open Goods Issuing.
+2. Choose a product and enter quantity and destination.
+3. Click Save.",An issue note is created successfully.,Passed,"Local Python demo: Created a DRAFT issue for 6 SKU001 units, destination Customer, FIFO.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-205,Confirm Issue with Sufficient Stock,FR-204,Functional,Must,A valid issue note exists and the available SKU001 stock is at least 6 units.,"
+1. Choose an issue note with quantity within available stock.
+2. Click Check and Confirm.
+3. Review stock after the issue.",The issue succeeds and stock decreases by the issued quantity.,Passed,"Local Python demo: Issued 6 FIFO units: LOT-OLD stock decreased from 30 to 24.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-206,Reject Issue Above Available Stock,FR-204,Functional,Must,A draft issue note requests more units than are available.,"
+1. Open an issue note.
+2. Enter a quantity greater than available stock.
+3. Click Confirm.",The system warns of insufficient stock and does not issue goods.,Passed,"Local Python demo: Issuing 999 units raised a stock-rule error; LOT-OLD balance stayed at 30.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-207,Scan a Valid Product Code,FR-205,Functional,Must,Barcode 8930000000001 is registered for SKU001.,"
+1. Open QR/Barcode Scanning.
+2. Scan 8930000000001.
+3. Compare the displayed product with the expected SKU001.
+4. Confirm the scan did not add an unrelated product.",The system identifies SKU001 for the barcode, no incorrect SKU is selected.,Passed,"Local Python demo: Barcode 8930000000001 returned MATCH and SKU001.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-208,Reject Unknown or Ambiguous Scan,FR-205,Functional,Must,Prepare a test environment containing a shared lot name LOT-SHARED for SKU001 and SKU003, do not set an expected SKU.,"
+1. Open QR/Barcode Scanning.
+2. Scan UNKNOWN-404 and check the result.
+3. In the prepared test fixture, scan LOT-SHARED without an expected SKU.
+4. Check the ambiguity message and scan counter.",UNKNOWN-404 returns NOT_FOUND. LOT-SHARED returns AMBIGUOUS and requests a SKU, no scanned count is increased.,Passed,"Local Python demo: UNKNOWN-404 returned NOT_FOUND; shared LOT-SHARED returned AMBIGUOUS without increasing scan count (revised regression run).
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,
+TC-209,Count Items by Scanning,FR-206,Functional,Must,A receipt or issue line for SKU001 is open and the scan counter is initially zero.,"
+1. Open a product line in a receipt or issue note.
+2. Scan the matching code multiple times.
+3. Check the scanned count.",The scanned count increases per scan, the transaction is not auto-confirmed.,Passed,"Local Python demo: Three valid scans for CHECK-01 resulted in scanned count 3.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-210,Create a Return Note,FR-207,Functional,Must,"SKU001, LOT-OLD and A-01 exist; staff can create return notes.","
+1. Open Returns.
+2. Select a previously issued product and enter quantity and reason.
+3. Click Save.",A return note is created.,Passed,"Local Python demo: Created DRAFT return for SKU001 / LOT-OLD / A-01 / quantity 2.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-211,Reject Zero-Quantity Return,FR-207,Functional,Must,Return screen is available and quantity is required to be positive.,"
+1. Open the Returned Goods screen.
+2. Enter quantity 0 and a return reason.
+3. Click Save.",An invalid quantity message is shown, no return is created.,Passed,"Local Python demo: Zero-quantity return was rejected; no return note created.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-212,Quarantine Returned Goods,FR-208,Functional,Must,A draft return for two units has been created, it is not yet inspected.,"Input: Draft return for SKU001/LOT-OLD, A-01, 2 units; inspection: QUARANTINE.
+1. Create a draft return for SKU001 and LOT-OLD.
+2. Choose Quarantine when confirming.
+3. View available and quarantined stock.",The returned goods are quarantined and do not increase available stock.,Passed,"Local Python demo: 2 returned units went to QUARANTINE; AVAILABLE balance remained 30.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-213,Create a Bin Transfer Note,FR-209,Functional,Must,A-01 and B-01 are active, source has at least 3 units.,"Input: SKU001; LOT-OLD; A-01 to B-01; quantity 3.
+1. Open Bin Transfer.
+2. Choose source bin, destination bin, and quantity.
+3. Click Save.",The transfer note is saved with the correct source and destination.,Passed,"Local Python demo: Created DRAFT transfer for 3 LOT-OLD units from A-01 to B-01.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-214,Confirm a Bin Transfer,FR-210,Functional,Must,A draft transfer exists, source stock and destination capacity are sufficient.,"Input: Valid draft transfer: SKU001/LOT-OLD, A-01 to B-01, quantity 3.
+1. Open a valid transfer note.
+2. Click Confirm Transfer.
+3. Review quantities in both bins.",Source stock decreases and destination stock increases equally, total stock stays unchanged.,Passed,"Local Python demo: Transfer completed: A-01 30→27; B-01 0→3; total unchanged.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,
+TC-215,Prevent Duplicate Transfer,FR-210,NFR-202,Functional,Must,The transfer has already been confirmed exactly once.,"Input: Already confirmed transfer: SKU001/LOT-OLD, A-01 to B-01, quantity 3.
+1. Choose an already confirmed transfer.
+2. Try to confirm it again.
+3. Recheck stock in both bins.",No additional stock movement is recorded.,Passed,"Local Python demo: Second confirmation was rejected; B-01 stayed at 3 units.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-216,Reject Transfer When Destination Bin Is Full,FR-211,Functional,Must,A-01 has 35 units of LOT-NEW, C-01 can hold only 30 more units.,"
+1. Create a draft transfer of 35 SKU001/LOT-NEW units from A-01 to C-01.
+2. Review C-01: 20 of its 50 slots are occupied.
+3. Click Confirm Transfer.
+4. Recheck stock in A-01 and C-01.",Transfer is rejected: C-01 has only 30 units of free capacity. Both bin balances stay unchanged.,Passed,"Local Python demo: Transfer of 35 units into bin with only 30 free was rejected.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-217,Allow Warehouse Role to Confirm Transfer,FR-212,Functional,Must,A valid pending transfer exists, demo allows MANAGER to confirm.,"
+1. Create a valid draft transfer.
+2. Select demo role STAFF or MANAGER.
+3. Click Confirm.",The transfer is confirmed (demo role check, not a secure login system).,Passed,"Local Python demo: MANAGER demo role confirmed the transfer; destination received 3 units.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,
+TC-218,Reject Guest Role for Transfer,FR-212,Functional,Must,A valid pending transfer exists, demo GUEST role has no confirm permission.,"
+1. Create a valid draft transfer.
+2. Select demo role GUEST.
+3. Click Confirm.",The operation is rejected and stock remains unchanged.,Passed,"Local Python demo: GUEST demo role was rejected; source stock remained 30 units.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-219,FIFO Recommends the Oldest Batch,FR-213,Functional,Should,LOT-OLD and LOT-NEW are both eligible available batches.,"
+1. Open an issue note for a product with multiple batches.
+2. Select FIFO.
+3. Review the recommended batch order.",The earliest received eligible batch is recommended first.,Passed,"Local Python demo: FIFO preview selected LOT-OLD as the oldest eligible batch.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-220,FIFO Skips Blocked Batches,FR-213,Functional,Should,Test data include an older batch labeled QUARANTINE and normal available batches.,"
+1. Open an issue note with a blocked or quarantined batch.
+2. Select FIFO.
+3. Review the recommended batches.",Blocked batches are not included in the recommendation.,Passed,"Local Python demo: FIFO excluded QUARANTINE lot and selected available LOT-OLD.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-221,FIFO Allocates Across Batches,FR-214,Functional,Should,LOT-OLD and LOT-NEW are eligible and have enough combined stock.,"
+1. Open an issue requiring more items than the oldest batch contains.
+2. Select FIFO and review allocation.
+3. Confirm if the stock is sufficient.","The system uses the oldest batch first, then the next one.",Passed,"Local Python demo: FIFO allocation for 40: LOT-OLD 30 and LOT-NEW 10.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-222,FEFO Recommends the Nearest Expiry,FR-215,Functional,Should,Two eligible batches have different expiry dates.,"
+1. Open an issue note with batches having different expiry dates.
+2. Select FEFO.
+3. Review the recommended batch order.",The eligible batch with the nearest expiry date is recommended first.,Passed,"Local Python demo: FEFO preview selected LOT-NEW (expiry 2027-03-01) before LOT-OLD.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-223,FEFO Skips Expired Batches,FR-215,Functional,Should,The test environment includes an expired batch and at least one unexpired batch.,"
+1. Open an issue note containing an expired batch.
+2. Select FEFO.
+3. Review the recommended batches.",Expired batches are excluded from the recommendation.,Passed,"Local Python demo: FEFO excluded expired LOT-EXPIRED from selection.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,,
+TC-224,FEFO Handles Equal Expiry Dates,FR-216,Functional,Should,Two eligible batches have the same expiry date but different receiving dates.,"
+1. Prepare LOT-EARLY and LOT-NEW with expiry 2027-03-01 and available quantities 5 and 70.
+2. Check that LOT-EARLY was received before LOT-NEW.
+3. Request 10 units of SKU001 and preview FEFO.
+4. Check the suggested quantities for each batch.",FEFO allocates 5 units from LOT-EARLY and 5 from LOT-NEW, earlier receiving date breaks the expiry tie.,Passed,"Local Python demo: FEFO tie: LOT-EARLY 5 units, then LOT-NEW 5 units.
+Local verification 2026-10-22: corresponding Python unit test PASSED. Integrated/manual application: NOT RUN.",Local automated Python unittest (verification re-run),2026-10-22,,,
+TC-225,Search Inventory Within 2 Seconds,NFR-201,Non-functional,Should,Integrated application has seeded inventory data and a reproducible search dataset, measurement environment is recorded.,"
+1. Open the integrated stock search screen.
+2. Search SKU001 ten times, clearing the field between runs.
+3. Record each response time and the average.
+4. Compare measured times with the agreed 2-second limit.",Search results are displayed within 2 seconds for each normal-load trial, record measurements and device/environment.,Not Run,Designed NFR test, no timed integrated-system measurements are available.,,,
+TC-301,Verify Initialize & Query Real-time Stock Balances,FR-301,Functional,High,"Initialize stock for SKU 'SKU-301' at bin 'BIN-A1' (on-hand=100, allocated=20, locked=5) and query the real-time stock balances.","1. Input sku='SKU-301', bin='BIN-A1', on_hand=100, allocated=20, locked=5; 
+2. Call seed_stock();
+3. Call get_stock('SKU-301', 'BIN-A1')","System returns on_hand=100, allocated=20, locked=5, and atp=75.",Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-302,Verify Allocate Stock & Deduct ATP,FR-302,Functional,High,Submit a stock reservation request of 25 units for 'SKU-301' at 'BIN-A1' and query the updated balances.,"1. Input reservation request from ACT-08 with reserve_qty=25; 
+2. Verify ATP (75) >= Requested (25); 
+3. Call allocate_stock('SKU-301', 'BIN-A1', 25) and query balances","allocated increases to 45, atp decreases to 50, and on_hand remains unchanged at 100.",Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-303,Verify Record Stock Adjustments with Reason Codes,FR-303,Functional,High,Record a stock adjustment of -10 units for 'SKU-301' with reason code 'DAMAGED' and query the updated stock balances.,"1. Input idempotency_key='IK-303', sku='SKU-301', qty_delta=-10, reason_code='DAMAGED'; 
+2. Call adjust_inventory() as ACT-301;
+3. Query updated stock balances",Adjustment succeeds, on_hand decreases to 90 and atp decreases to 40 (both remain >= 0).,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,
+TC-304,Verify Enforce Transaction Idempotency on Duplicate Request,FR-304,Functional,High,Submit an inventory adjustment of -5 units with reason 'EXPIRED' and replay the exact same request using idempotency key 'IK-304'.,"1. Input idempotency_key='IK-304', qty_delta=-5, reason_code='EXPIRED'; 
+2. Call adjust_inventory() 1st time; 
+3. Replay exact same call 2nd time with idempotency_key='IK-304'",2nd call returns cached transaction (is_replay=True) without double-counting, on_hand is deducted only once (85).,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,
+TC-305,Verify Append-Only Immutable Transaction Ledger Record,FR-305,Functional,High,Execute an inventory adjustment of -5 units for 'SKU-302' with reason 'LOST' and inspect the newly generated transaction ledger record.,"1. Input idempotency_key='IK-305', sku='SKU-302', qty_delta=-5, reason_code='LOST'; 
+2. Execute adjust_inventory(); 
+3. Inspect newly generated record in transaction ledger","Ledger appends 1 immutable entry containing tx_id, sku='SKU-302', qty_delta=-5, reason_code='LOST', on_hand_before=50, on_hand_after=45, atp_after=40.",Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-306,Verify Create Blind Cycle Count & Mask System Quantity,FR-306,Functional,High,"Create a blind cycle count session for 'SKU-303' at 'BIN-C1', request the count sheet as a Warehouse Clerk, and inspect the returned fields.","1. Call create_blind_count('SKU-303', 'BIN-C1'); 
+2. Request count sheet as Warehouse Clerk; 
+3. Inspect returned fields","Count sheet returns session_id, sku, bin, and status, and completely omits/masks snapshot_expected_qty.",Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-307,Verify Submit Physical Count & Calculate Variance,FR-307,Functional,High,Submit a physical count of 197 units for session 'CC-301' and check the calculated variance.,"1. Input session_id='CC-301', counted_qty=197 (>= 0) as ACT-303; 
+2. Call submit_physical_count('CC-301', 197); 
+3. Check calculated variance",System computes Variance = Counted Qty (197) - Snapshot Expected Qty (200) = -3.,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-308,Verify Auto-Reconcile or Hold Based on Threshold,FR-308,Functional,High,"Submit a physical count within threshold (197 on 'CC-301') and a count exceeding threshold (180 on 'CC-302'), then check session statuses and stock.","1. Submit counted_qty=197 (|Variance|=3 <= 5) on CC-301; 
+2. Submit counted_qty=180 (|Variance|=20 > 5) on CC-302; 
+3. Check session statuses and stock",CC-301 auto-adjusts stock (on_hand=197) and marks completed, CC-302 sets status to pending_approval without altering stock.,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,
+TC-309,Verify Real-Time ATP Query & Allocation Latency (P99 <= 100ms),"NFR-301, FR-301, FR-302",Non-functional,High,"Dispatch a workload of 1,000 concurrent ATP query and allocation requests and measure the P99 response latency.","1. Dispatch workload of 1,000 ATP query & allocation requests (reserve_qty=1); 
+2. Measure response time for each request; 
+3. Compute P99 latency","P99 response time across 1,000 requests/sec is <= 100 ms.",Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-310,Verify Concurrency & Locking Prevents Negative ATP,"NFR-302, FR-302, FR-303",Non-functional,High,Spawn 100 concurrent threads simultaneously requesting 1 unit of 'SKU-LOCK' at 'BIN-L1' and inspect the final ATP and transaction counts.,"1. Spawn 100 concurrent threads simultaneously calling allocate_stock('SKU-LOCK', 'BIN-L1', qty=1); 
+2. Wait for completion; 
+3. Inspect final atp and success/failure counts","Exactly 50 requests succeed (atp=0, allocated=50) and 50 raise InsufficientStockError; 0 race conditions or negative ATP occur.",Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-311,Verify Idempotency Key Retention (>= 72h) & Fast Lookup (<= 10ms),"NFR-303, FR-304",Non-functional,High,"Execute an inventory adjustment with idempotency key 'IK-NFR-303', replay the same key, and measure lookup duration and TTL metadata.","1. Execute adjust_inventory with idempotency_key='IK-NFR-303', qty_delta=-2, reason_code='DAMAGED'; 
+2. Replay same key and measure lookup duration and TTL metadata",Idempotency key TTL is >= 72 hours and duplicate lookup overhead is <= 10 ms.,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-312,Verify Immutable Audit Ledger Blocks UPDATE and DELETE,"NFR-304, FR-305",Non-functional,High,Attempt to update or delete historical ledger record 'TX-001' and verify the ledger contents remain unchanged.,"1. Attempt to execute an UPDATE modifying TX-001.qty_delta; 
+2. Attempt to execute a DELETE removing TX-001 from ledger; 
+3. Verify ledger contents",Both UPDATE and DELETE operations are rejected with ImmutableLedgerError, historical record remains intact.,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,
+TC-313,Verify Backend Blind Count Serializer Strips snapshot_expected_qty,"NFR-305, FR-306",Non-functional,High,Request the serialized JSON count sheet for session 'CC-305' as a Warehouse Clerk and inspect the raw payload for masked expected quantities.,"1. Request serialized JSON payload for CC-305 as Warehouse Clerk; 
+2. Inspect raw serialized JSON string bytes for 'snapshot_expected_qty' or '250'",0 bytes of snapshot_expected_qty are present in the serialized JSON payload sent to ACT-303.,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-314,Verify Supervisor Review & Rejection of High-Variance Session,FR-308,Regression,Medium,Reject high-variance cycle count session 'CC-314' as an Inventory Supervisor and query the session status and on-hand stock.,"1. Input session_id='CC-314', approve=False, actor='ACT-301'; 
+2. Call review_cycle_count('CC-314', approve=False); 
+3. Query session status and on_hand stock",Session status transitions to rejected and on_hand remains unchanged at 200.,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,,,
+TC-315,Verify Rejection of Zero-Quantity Adjustment,FR-303,FR-305,Regression,High,Attempt to submit an inventory adjustment with a zero quantity delta (qty_delta=0) for 'SKU-315' and verify the exception and ledger count.,"1. Input idempotency_key='IK-315', sku='SKU-315', qty_delta=0, reason_code='FOUND', actor='ACT-301'; 
+2. Call adjust_inventory() with qty_delta=0; 
+3. Verify exception and ledger count",System raises ZeroAdjustmentError, on_hand remains 80 and 0 records are written to the ledger (FR-305).,Passed,All assertions satisfied.,Module 3 test suite (M3 owner),2026-10-22,,
+TC-401,Configure a valid SKU replenishment policy,FR-401,Functional,Must,User controller@wrhm.vn is logged in with role Inventory Controller (ACT-02), SKU-WIDGET-01 and its supplier exist and are active,"1.Open the replenishment policy screen for SKU-WIDGET-01.
+2.Set ROP = 50, safety stock = 30, lead time = 7 days, MOQ = 25, order multiple = 25.
+3.Save the policy and reopen the SKU record.","Policy is saved; reopening shows ROP 50, safety stock 30, lead time 7, MOQ 25 and order multiple 25; the values are displayed unchanged.",Passed,Passed: policy saved with ROP 50 / safety stock 30 / lead time 7 / MOQ 25 / multiple 25, values unchanged after reopening, POLICY_UPDATED logged.,Cao Ba Son,2026-10-22,
+TC-402,Reject invalid replenishment policy values,FR-401,Functional,Must,"User controller@wrhm.vn is logged in as Inventory Controller; SKU-WIDGET-01 has a stored policy with ROP 50, safety stock 30, lead time 7, MOQ 25","1.Open the replenishment policy for SKU-WIDGET-01.
+2.Set ROP = -5 and save.
+3.Set safety stock = -10 and save.
+4.Set lead time = 0 and save.
+5.Set MOQ = 0 and save.
+6.Reopen the policy.",Each invalid value is rejected with a field-level validation error, the stored policy remains ROP 50 / safety stock 30 / lead time 7 / MOQ 25 and no partial update is stored.,Passed,Passed: all 5 invalid value sets rejected with ValidationError, stored policy unchanged, no extra POLICY_UPDATED entry.,Cao Ba Son,2026-10-22,
+TC-403,Low-stock alert raised at the ROP boundary,FR-402,Functional,Must,"SKU-WIDGET-01 has available stock 55, ROP 50 and no open suggestion; staff01@wrhm.vn is logged in","1.Post a stock-out of 5 units for SKU-WIDGET-01.
+2.Wait for the next dashboard refresh (or trigger the low-stock evaluation).
+3.Open the low-stock dashboard.","SKU-WIDGET-01 appears within 60 s with available 50, ROP 50, shortage 0 and the alert marked 'at threshold'.",Passed,"Passed: alert raised immediately with available 50, ROP 50, shortage 0, severity AT_THRESHOLD.",Cao Ba Son,2026-10-22,,,,
+TC-404,No alert is raised while stock stays above the ROP,FR-402,Functional,Should,SKU-WIDGET-01 has available stock 80 and ROP 50, staff01@wrhm.vn is logged in,"1.Post a stock-out of 20 units for SKU-WIDGET-01 (available becomes 60).
+2.Refresh the low-stock dashboard.",SKU-WIDGET-01 does not appear on the low-stock dashboard, the last evaluation timestamp is updated and no alert is stored.,Passed,Passed: no alert after stock reached 60 (> ROP 50), last evaluation timestamp updated.,Cao Ba Son,2026-10-22,
+TC-405,Automated cycle creates one suggestion per uncovered SKU,FR-403,Functional,Must,"The scheduler (ACT-05) is configured; 200 active SKUs exist, 12 of them at or below ROP with no open suggestion and no incoming purchase order","1.Trigger the replenishment cycle on demand.
+2.Inspect the suggestion queue.
+3.Open the cycle execution record.","Exactly 12 suggestions are created, one per SKU and supplier; SKUs above ROP and SKUs with an incoming order are skipped; the execution record shows 200 SKUs evaluated and 12 suggestions created.",Passed,"Passed: 200 SKUs evaluated, 12 suggestions created, 188 above ROP, one open suggestion per SKU.",Cao Ba Son,2026-10-22,,,,
+TC-406,"Suggested quantity follows the lead-time, safety-stock and MOQ formula",FR-404,Functional,Must,"SKU-WIDGET-01 policy: ROP 50, safety stock 30, lead time 7 days, MOQ 25, order multiple 25; average daily demand 10; available stock 20; controller@wrhm.vn is logged in","1.Post a stock-out of 35 units (55 -> 20).
+2.Open the quantity calculation for SKU-WIDGET-01.
+3.Compare the suggested quantity and inputs with the expected formula.","Suggested quantity = max(25, ceil(((10 x 7) + 30 - 20) / 25) x 25) = 100; the result shows demand 10/day, lead time 7, safety stock 30, available 20 and the formula trace.",Passed,"Passed: quantity 100 = ceil(((10 x 7) + 30 - 20) / 25) x 25, flag CALCULATED, inputs exposed.",Cao Ba Son,2026-10-22,,,,
+TC-407,MOQ acts as the floor when the net requirement is lower,FR-404,Functional,Should,"SKU-WIDGET-02 policy: ROP 10, safety stock 0, lead time 2 days, MOQ 25, order multiple 25; average daily demand 1; available stock 5","1.Run the quantity calculation for SKU-WIDGET-02.
+2.Read the suggested quantity and the flag.","The net requirement (1 x 2) + 0 - 5 is negative, so the quantity is raised to the MOQ floor of 25 and the suggestion is flagged MOQ_FLOOR.",Passed,"Passed: net requirement -3 raised to the MOQ floor of 25, flag MOQ_FLOOR.",Cao Ba Son,2026-10-22,,,,
+TC-408,Fallback to ROP minus available when demand history is missing,FR-404,Functional,Should,"SKU-WIDGET-02 has no demand history records; policy ROP 10, safety stock 0, MOQ 25, order multiple 25; available stock 5","1.Ignore or remove the demand history of SKU-WIDGET-02.
+2.Run the quantity calculation.","The system falls back to ROP - available = 5, raises the quantity to the MOQ floor of 25 and flags the suggestion FALLBACK.",Passed,"Passed: without demand history the quantity falls back to ROP - available and is raised to 25, flag FALLBACK.",Cao Ba Son,2026-10-22,,,,
+TC-409,Reject suggestion quantities below MOQ or outside the order multiple,FR-405,Functional,Must,An open suggestion exists for SKU-WIDGET-02 with MOQ 25 and order multiple 25, controller@wrhm.vn is logged in,"1.Adjust the quantity to 10 and save.
+2.Adjust the quantity to 30 and save.
+3.Adjust the quantity to 50 and save.",10 is rejected as below MOQ, 30 is rejected as not a multiple of 25, 50 is accepted and becomes the ordered quantity.,Passed,"Passed: 10 rejected (below MOQ), 30 rejected (not a multiple of 25), 50 accepted as the ordered quantity.",Cao Ba Son,2026-10-22,
+TC-410,Accepted suggestions become one purchase order per supplier,FR-405,Functional,Must,"Three open suggestions exist: SKU-WIDGET-01 and SKU-WIDGET-02 for supplier SUP-A, SKU-NO-IMG-01 for supplier SUP-B; unit prices are on file","1.Select all three suggestions in the queue.
+2.Choose 'Create purchase orders'.
+3.Inspect the created draft orders.","Two DRAFT purchase orders are created, one per supplier, with line quantities equal to the accepted suggestions; each total equals the sum of its line totals; the converted suggestions leave the open queue.",Passed,"Passed: 3 suggestions produced 2 DRAFT orders (SUP-A, SUP-B); totals equal line sums; open queue empty.",Cao Ba Son,2026-10-22,,,,
+TC-411,Dismissal of a suggestion requires a written reason,FR-405,Functional,Should,An open suggestion exists and controller@wrhm.vn is logged in,"1.Dismiss the suggestion without a reason.
+2.Dismiss it with the reason 'Stock already ordered through another channel'.
+3.Inspect the suggestion status and the open queue.","The empty dismissal is blocked with a validation error; the dismissal with a reason sets the status DISMISSED, stores the reason and the actor, and removes the suggestion from the open queue.",Passed,Passed: empty reason blocked, dismissal with reason stored (DISMISSED) and removed from the open queue.,Cao Ba Son,2026-10-22,,,
+TC-412,Replenishment cycle is idempotent,NFR-404,Non-functional,Must,The cycle has just run over 200 active SKUs and 12 open suggestions exist, no stock movement occurred since,"1.Re-run the replenishment cycle.
+2.Compare the suggestion identifiers and count.
+3.Open the new execution record.",0 new suggestions are created, the 12 existing suggestions keep their identifiers and are refreshed, the execution record shows 0 created and 12 skipped.,Passed,Passed: re-run created 0 suggestions and skipped 12, suggestion identifiers unchanged.,Cao Ba Son,2026-10-22
+TC-413,Replenishment cycle processes the full catalog within the window,NFR-401,Non-functional,Should,"The catalog contains 20,000 active SKUs with replenishment policies and the nightly window is available","1.Trigger a full replenishment cycle.
+2.Measure the runtime and read the execution record.","The cycle completes within 5 minutes, evaluates all 20,000 SKUs and records the result without timeouts or partial writes.",Passed,"Passed: 20,000 SKUs evaluated in under 1 second (target <= 5 minutes); execution record status OK.",Cao Ba Son,2026-10-22,,,,
+TC-414,Low-stock alert is raised within the latency target,NFR-402,Non-functional,Should,SKU-WIDGET-01 has available stock 55 and ROP 50, staff01@wrhm.vn is logged in,"1.Post a stock-out of 5 units and start the timer.
+2.Open the low-stock alert list.
+3.Stop the timer.","The alert appears in less than 60 seconds with available 50, ROP 50 and severity AT_THRESHOLD.",Passed,"Passed: alert available immediately after the stock-out, far below the 60 second target; severity AT_THRESHOLD.",Cao Ba Son,2026-10-22,,,
+TC-415,Suggestion workflow responds within the interactive target,NFR-405,Non-functional,Could,At least one open suggestion exists and controller@wrhm.vn is logged in,"1.Open the suggestion queue and start the timer.
+2.Adjust the quantity to a valid value.
+3.Create the draft purchase order and stop the timer.",The three actions complete within 2 seconds in total and the draft purchase order is created.,Passed,Passed: queue + adjustment + order creation completed in under 0.1 second (target <= 2 s), order in DRAFT.,Cao Ba Son,2026-10-22,,,

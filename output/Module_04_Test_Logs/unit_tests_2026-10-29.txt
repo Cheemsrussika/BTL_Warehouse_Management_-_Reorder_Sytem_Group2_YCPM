@@ -1,0 +1,33 @@
+MODULE 4 TEST RUN
+Started: 2026-10-29T14:57:10+07:00
+Command: /home/quang/Videos/Warehouse_Inventory_Reorder_System/.venv/bin/python -m pytest -v -s src/Module4/Test/test_module4.py --junitxml=/home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_04_Test_Logs/test_run_2026-10-29.xml
+Working directory: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send
+------------------------------------------------------------------------
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /home/quang/Videos/Warehouse_Inventory_Reorder_System/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send
+collecting ... collected 15 items
+
+src/Module4/Test/test_module4.py::test_tc401_configure_valid_policy PASSED
+src/Module4/Test/test_module4.py::test_tc402_reject_invalid_policy_values PASSED
+src/Module4/Test/test_module4.py::test_tc403_alert_at_rop_boundary PASSED
+src/Module4/Test/test_module4.py::test_tc404_no_alert_above_rop PASSED
+src/Module4/Test/test_module4.py::test_tc405_cycle_creates_one_suggestion_per_uncovered_sku PASSED
+src/Module4/Test/test_module4.py::test_tc406_quantity_formula PASSED
+src/Module4/Test/test_module4.py::test_tc407_moq_floor PASSED
+src/Module4/Test/test_module4.py::test_tc408_fallback_without_demand_history PASSED
+src/Module4/Test/test_module4.py::test_tc409_reject_invalid_quantities PASSED
+src/Module4/Test/test_module4.py::test_tc410_one_purchase_order_per_supplier PASSED
+src/Module4/Test/test_module4.py::test_tc411_dismissal_requires_reason PASSED
+src/Module4/Test/test_module4.py::test_tc412_cycle_idempotency PASSED
+src/Module4/Test/test_module4.py::test_tc413_cycle_throughput PASSED
+src/Module4/Test/test_module4.py::test_tc414_alert_latency PASSED
+src/Module4/Test/test_module4.py::test_tc415_suggestion_workflow_responsiveness PASSED
+
+- generated xml file: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_04_Test_Logs/test_run_2026-10-29.xml -
+============================== 15 passed in 0.12s ==============================
+
+Exit code: 0
+Log: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_04_Test_Logs/unit_tests_2026-10-29.txt
+JUnit: /home/quang/Videos/Warehouse_Inventory_Reorder_System/Send/output/Module_04_Test_Logs/test_run_2026-10-29.xml

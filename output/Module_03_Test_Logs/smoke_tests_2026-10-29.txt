@@ -1,0 +1,5 @@
+MODULE 3 - SERVICE SMOKE CHECK
+Date: 2026-10-29T14:57:10+07:00
+Command: Python service-level check (no web server or interactive CLI required)
+------------------------------------------------------------------------
+PASS | stock query and adjustment | on_hand=18, atp=18

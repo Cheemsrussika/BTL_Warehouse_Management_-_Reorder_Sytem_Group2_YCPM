@@ -1,0 +1,8 @@
+MODULE 3 - TEST/REQUIREMENT ANNOTATION INVENTORY
+Date: 2026-10-29T14:57:10+07:00
+Command: AST scan of src/Module3/test_warehouse_inventory.py
+------------------------------------------------------------------------
+Test functions found in source: 15
+Distinct test-case IDs in test docstrings: 15: TC-301, TC-302, TC-303, TC-304, TC-305, TC-306, TC-307, TC-308, TC-309, TC-310, TC-311, TC-312, TC-313, TC-314, TC-315
+Distinct FR/NFR IDs in test docstrings: 13: FR-301, FR-302, FR-303, FR-304, FR-305, FR-306, FR-307, FR-308, NFR-301, NFR-302, NFR-303, NFR-304, NFR-305
+Note: This is a source-annotation inventory, not an authoritative RTM coverage calculation. Compare it with the module workbook.

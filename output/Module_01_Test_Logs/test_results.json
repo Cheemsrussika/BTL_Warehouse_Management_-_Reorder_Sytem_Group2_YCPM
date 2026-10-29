@@ -1,0 +1,202 @@
+[
+  {
+    "id": "TC-101",
+    "title": "Valid User Authentication",
+    "related_requirements": "FR-101, NFR-101",
+    "preconditions": "An active account exists for staff01@wrhm.vn",
+    "steps": [
+      "Authenticate with the provisioned email and password",
+      "Confirm the session is bound to the calling account",
+      "Measure the authentication latency against the NFR-101 budget"
+    ],
+    "expected_result": "Valid credentials authenticate and an active session is created within 2 s",
+    "actual_result": "Latency measured: 0.0000s (Target <= 2.0s)",
+    "status": "PASSED",
+    "duration_s": 0.0002
+  },
+  {
+    "id": "TC-102",
+    "title": "Rejection of login attempt with incorrect credentials",
+    "related_requirements": "FR-101",
+    "preconditions": "An active account exists for staff01@wrhm.vn",
+    "steps": [
+      "Attempt to authenticate with a wrong password",
+      "Confirm the attempt is rejected without disclosing account state",
+      "Confirm no session was established"
+    ],
+    "expected_result": "Invalid credentials are rejected and no session is created",
+    "actual_result": "Attempting invalid login; caught ValueError('Invalid credentials')",
+    "status": "PASSED",
+    "duration_s": 0.0002
+  },
+  {
+    "id": "TC-103",
+    "title": "Unauthorized operational users cannot perform administrative actions",
+    "related_requirements": "FR-102, NFR-102",
+    "preconditions": "Warehouse Staff is signed in",
+    "steps": [
+      "Sign in as Warehouse Staff",
+      "Attempt an administrative action (user provisioning)",
+      "Confirm the request is refused with a permission error"
+    ],
+    "expected_result": "A role mismatch is refused with a 403 / PermissionError",
+    "actual_result": "Staff attempting admin user provisioning; caught PermissionError(403 Forbidden / PermissionError)",
+    "status": "PASSED",
+    "duration_s": 0.0002
+  },
+  {
+    "id": "TC-104",
+    "title": "User provisioning by an administrator creates an immutable audit record",
+    "related_requirements": "FR-101, FR-102, FR-103",
+    "preconditions": "The IT Administrator is signed in with administrative privileges",
+    "steps": [
+      "Sign in as IT Administrator",
+      "Provision a new account with an email, password and role",
+      "Confirm the account exists and carries the assigned role",
+      "Confirm an immutable PROVISION_USER entry was recorded"
+    ],
+    "expected_result": "The account is created and a PROVISION_USER entry is written to the audit trail",
+    "actual_result": "Admin provisioned controller01@wrhm.vn; verified immutable PROVISION_USER log entry by admin@wrhm.vn",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-105",
+    "title": "System prevents registering duplicate barcodes across SKUs",
+    "related_requirements": "FR-104, NFR-103",
+    "preconditions": "SKU-WIDGET-01 already owns barcode 8931234567890",
+    "steps": [
+      "Sign in as Inventory Controller",
+      "Attempt to register a new SKU with an existing barcode",
+      "Confirm the registration is rejected and no SKU was added"
+    ],
+    "expected_result": "A second SKU claiming the same barcode is rejected",
+    "actual_result": "Attempted duplicate barcode '8931234567890'; caught ValueError('Duplicate barcode')",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-107",
+    "title": "System rejects negative Reorder Point and non-positive Minimum Order Quantity",
+    "related_requirements": "FR-105",
+    "preconditions": "SKU-WIDGET-02 exists in the master catalog",
+    "steps": [
+      "Sign in as Inventory Controller",
+      "Attempt to save a negative ROP and a zero MOQ",
+      "Confirm the update is rejected",
+      "Confirm the stored thresholds are untouched"
+    ],
+    "expected_result": "Invalid thresholds are rejected and the stored values are unchanged",
+    "actual_result": "Setting ROP=-5, MOQ=0; caught ValueError('ROP must be >= 0')",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-108",
+    "title": "Storage hierarchy duplicate coordinate validation",
+    "related_requirements": "FR-106",
+    "preconditions": "Bin Z1-A01-R01-S1-B01 already exists",
+    "steps": [
+      "Sign in as Warehouse Manager",
+      "Attempt to create a bin with an existing coordinate",
+      "Confirm the creation is rejected and the bin count is unchanged"
+    ],
+    "expected_result": "A duplicate composite coordinate is rejected",
+    "actual_result": "Attempted duplicate bin coordinate 'Z1-A01-R01-S1-B01'; caught ValueError('Duplicate coordinate')",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-109",
+    "title": "Deactivation of a user account blocks subsequent login",
+    "related_requirements": "FR-101, FR-102, FR-103",
+    "preconditions": "staff01@wrhm.vn is active and the IT Administrator is signed in",
+    "steps": [
+      "Deactivate staff01@wrhm.vn as IT Administrator",
+      "Confirm is_active is False (soft delete, not a hard delete)",
+      "Confirm a DEACTIVATE_USER entry was recorded",
+      "Attempt to sign in again and confirm it is refused"
+    ],
+    "expected_result": "The account is soft deleted, audited and can no longer authenticate",
+    "actual_result": "Deactivated user; verified is_active=False, DEACTIVATE_USER audit entry, login rejected",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-110",
+    "title": "System prevents archiving a SKU with active on-hand inventory",
+    "related_requirements": "FR-104",
+    "preconditions": "SKU-WIDGET-01 holds 150 units on hand",
+    "steps": [
+      "Sign in as Inventory Controller",
+      "Attempt to archive a SKU that still holds stock",
+      "Confirm the request is rejected and the SKU stays active",
+      "Archive a SKU with no stock and confirm it is soft deleted"
+    ],
+    "expected_result": "Archiving is rejected while stock > 0 and allowed once stock is zero",
+    "actual_result": "Attempted archiving SKU with on_hand=20; caught ValueError('Cannot archive SKU with stock > 0 (on hand: 20). Deplete or write off the balance first.')",
+    "status": "PASSED",
+    "duration_s": 0.0002
+  },
+  {
+    "id": "TC-111",
+    "title": "Product tracking flags are persisted",
+    "related_requirements": "FR-104",
+    "preconditions": "The catalog is reachable by the Inventory Controller",
+    "steps": [
+      "Sign in as Inventory Controller",
+      "Register a SKU with both tracking flags enabled",
+      "Read the record back and confirm both flags survived the save"
+    ],
+    "expected_result": "requires_batch and requires_expiry are stored as booleans",
+    "actual_result": "Verified requires_batch=True and requires_expiry=True persistence",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-112",
+    "title": "Bin capacity is a positive integer with derived free capacity",
+    "related_requirements": "FR-106",
+    "preconditions": "Bin Z1-A01-R01-S1-B04 holds 40 of its 50 unit capacity",
+    "steps": [
+      "Sign in as Warehouse Manager",
+      "Read the seeded bin and derive the free capacity",
+      "Create a new bin with capacity 50",
+      "Confirm a capacity of 0 is rejected"
+    ],
+    "expected_result": "Capacity is stored as a positive integer and free capacity is derived from it",
+    "actual_result": "Capacity 50 saved (free=10); capacity 0 rejected",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-113",
+    "title": "Audit log entries are append-only",
+    "related_requirements": "FR-103, NFR-104",
+    "preconditions": "At least one audit entry exists",
+    "steps": [
+      "Sign in as IT Administrator and produce an audit entry",
+      "Attempt to append, overwrite, delete and clear the audit trail",
+      "Confirm every attempt is refused and the trail is unchanged"
+    ],
+    "expected_result": "Direct modification and deletion of audit records are blocked",
+    "actual_result": "Attempted mutation/deletion of audit logs; caught PermissionError",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  },
+  {
+    "id": "TC-114",
+    "title": "Item image placeholder fallback display",
+    "related_requirements": "FR-107, CR-01",
+    "preconditions": "SKU-NO-IMG-01 exists without an image URL",
+    "steps": [
+      "Read a SKU that has an image URL",
+      "Read a SKU that has none",
+      "Confirm the placeholder graphic is returned for the missing image"
+    ],
+    "expected_result": "A generic placeholder is rendered when no image is associated",
+    "actual_result": "SKU-NO-IMG-01 queried; verified placeholder 'placeholder-thumbnail.svg' fallback",
+    "status": "PASSED",
+    "duration_s": 0.0001
+  }
+]

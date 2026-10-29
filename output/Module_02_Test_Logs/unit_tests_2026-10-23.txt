@@ -1,0 +1,37 @@
+MODULE 2 - LOCAL UNIT TEST RUN
+Scope: standalone Python + SQLite module, NOT integrated group application
+Command: python -m unittest discover -s tests -v
+Date (Asia/Bangkok): 2026-10-23
+----
+test_TC_201_valid_receipt_draft (test_module2.Module2Tests.test_TC_201_valid_receipt_draft) ... ok
+test_TC_202_confirm_receipt (test_module2.Module2Tests.test_TC_202_confirm_receipt) ... ok
+test_TC_203_reject_excess_receipt (test_module2.Module2Tests.test_TC_203_reject_excess_receipt) ... ok
+test_TC_204_valid_issue_draft (test_module2.Module2Tests.test_TC_204_valid_issue_draft) ... ok
+test_TC_205_confirm_issue (test_module2.Module2Tests.test_TC_205_confirm_issue) ... ok
+test_TC_206_reject_issue_excess (test_module2.Module2Tests.test_TC_206_reject_issue_excess) ... ok
+test_TC_207_scan_valid_code (test_module2.Module2Tests.test_TC_207_scan_valid_code) ... ok
+test_TC_208_scan_unknown (test_module2.Module2Tests.test_TC_208_scan_unknown) ... ok
+test_TC_209_count_scans (test_module2.Module2Tests.test_TC_209_count_scans) ... ok
+test_TC_210_create_return (test_module2.Module2Tests.test_TC_210_create_return) ... ok
+test_TC_211_reject_invalid_return_quantity (test_module2.Module2Tests.test_TC_211_reject_invalid_return_quantity) ... ok
+test_TC_212_classify_return (test_module2.Module2Tests.test_TC_212_classify_return) ... ok
+test_TC_213_create_transfer (test_module2.Module2Tests.test_TC_213_create_transfer) ... ok
+test_TC_214_confirm_transfer (test_module2.Module2Tests.test_TC_214_confirm_transfer) ... ok
+test_TC_215_duplicate_transfer (test_module2.Module2Tests.test_TC_215_duplicate_transfer) ... ok
+test_TC_216_reject_full_destination (test_module2.Module2Tests.test_TC_216_reject_full_destination) ... ok
+test_TC_217_authorized_transfer (test_module2.Module2Tests.test_TC_217_authorized_transfer) ... ok
+test_TC_218_unauthorized_transfer (test_module2.Module2Tests.test_TC_218_unauthorized_transfer) ... ok
+test_TC_219_fifo_oldest_first (test_module2.Module2Tests.test_TC_219_fifo_oldest_first) ... ok
+test_TC_220_fifo_skip_quarantine (test_module2.Module2Tests.test_TC_220_fifo_skip_quarantine) ... ok
+test_TC_221_fifo_across_batches (test_module2.Module2Tests.test_TC_221_fifo_across_batches) ... ok
+test_TC_222_fefo_nearest_expiry (test_module2.Module2Tests.test_TC_222_fefo_nearest_expiry) ... ok
+test_TC_223_fefo_skip_expired (test_module2.Module2Tests.test_TC_223_fefo_skip_expired) ... ok
+test_TC_224_fefo_tie_received_first (test_module2.Module2Tests.test_TC_224_fefo_tie_received_first) ... ok
+test_expected_sku_resolves_shared_lot (test_quality_review.QualityReview.test_expected_sku_resolves_shared_lot) ... ok
+test_same_lot_across_two_products_is_ambiguous (test_quality_review.QualityReview.test_same_lot_across_two_products_is_ambiguous) ... ok
+test_TC_208_unknown_and_ambiguous_lot (test_revision_TC208.RevisedTC208.test_TC_208_unknown_and_ambiguous_lot) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.085s
+
+OK

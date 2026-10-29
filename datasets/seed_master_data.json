@@ -1,0 +1,590 @@
+{
+  "users": [
+    {
+      "user_id": "U-ADM",
+      "email": "admin@wrhm.vn",
+      "role": "IT_ADMIN",
+      "is_active": true,
+      "password": "AdminPass123!"
+    },
+    {
+      "user_id": "U-MGR",
+      "email": "manager@wrhm.vn",
+      "role": "WAREHOUSE_MANAGER",
+      "is_active": true,
+      "password": "ManagerPass123!"
+    },
+    {
+      "user_id": "U-STA",
+      "email": "staff01@wrhm.vn",
+      "role": "WAREHOUSE_STAFF",
+      "is_active": true,
+      "password": "StaffPass123!"
+    },
+    {
+      "user_id": "U-CTL",
+      "email": "controller@wrhm.vn",
+      "role": "INVENTORY_CONTROLLER",
+      "is_active": true,
+      "password": "ControllerPass123!"
+    }
+  ],
+  "skus": [
+    {
+      "sku_code": "SKU-WIDGET-01",
+      "barcode": "8931234567890",
+      "name": "Industrial Widget A",
+      "uom": "EA",
+      "category": "Fasteners",
+      "supplier_id": "SUP-A",
+      "rop": 50,
+      "safety_stock": 30,
+      "lead_time_days": 7,
+      "moq": 25,
+      "order_multiple": 25,
+      "unit_price": 12.5,
+      "stock_on_hand": 55,
+      "reserved_qty": 0,
+      "default_bin": "Z1-A01-R01-S1-B01",
+      "image_url": "widget01.png",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-WIDGET-02",
+      "barcode": "8931234567891",
+      "name": "Industrial Widget B",
+      "uom": "EA",
+      "category": "Fasteners",
+      "supplier_id": "SUP-A",
+      "rop": 10,
+      "safety_stock": 0,
+      "lead_time_days": 2,
+      "moq": 25,
+      "order_multiple": 25,
+      "unit_price": 9.75,
+      "stock_on_hand": 5,
+      "reserved_qty": 0,
+      "default_bin": "Z1-A01-R01-S1-B02",
+      "image_url": "widget02.png",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-NO-IMG-01",
+      "barcode": "8931234567999",
+      "name": "Plain Item",
+      "uom": "EA",
+      "category": "General",
+      "supplier_id": "SUP-B",
+      "rop": 5,
+      "safety_stock": 2,
+      "lead_time_days": 5,
+      "moq": 1,
+      "order_multiple": 1,
+      "unit_price": 3.2,
+      "stock_on_hand": 15,
+      "reserved_qty": 0,
+      "default_bin": "Z1-A01-R01-S1-B03",
+      "image_url": null,
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-PACK-01",
+      "barcode": "8931234567801",
+      "name": "Packaging Tape",
+      "uom": "ROLL",
+      "category": "Packaging",
+      "supplier_id": "SUP-B",
+      "rop": 40,
+      "safety_stock": 20,
+      "lead_time_days": 10,
+      "moq": 10,
+      "order_multiple": 10,
+      "unit_price": 2.1,
+      "stock_on_hand": 90,
+      "reserved_qty": 0,
+      "default_bin": "Z1-A01-R01-S1-B04",
+      "image_url": "pack01.png",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-SEAL-02",
+      "barcode": "8931234567802",
+      "name": "Heat Seal Roll",
+      "uom": "ROLL",
+      "category": "Packaging",
+      "supplier_id": "SUP-B",
+      "rop": 30,
+      "safety_stock": 10,
+      "lead_time_days": 14,
+      "moq": 5,
+      "order_multiple": 5,
+      "unit_price": 18.0,
+      "stock_on_hand": 12,
+      "reserved_qty": 0,
+      "default_bin": "Z1-A01-R01-S1-B03",
+      "image_url": "seal02.png",
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "status": "ACTIVE"
+    },
+    {
+      "sku_code": "SKU-NOSUP-01",
+      "barcode": "8931234567803",
+      "name": "Legacy Gasket",
+      "uom": "EA",
+      "category": "Spare Parts",
+      "supplier_id": null,
+      "rop": 10,
+      "safety_stock": 0,
+      "lead_time_days": 3,
+      "moq": 5,
+      "order_multiple": 5,
+      "unit_price": 1.0,
+      "stock_on_hand": 8,
+      "reserved_qty": 0,
+      "default_bin": "Z1-A01-R01-S1-B03",
+      "image_url": null,
+      "is_perishable": false,
+      "shelf_life_days": 0,
+      "status": "ACTIVE"
+    }
+  ],
+  "storage_bins": [
+    {
+      "bin_code": "Z1-A01-R01-S1-B01",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B01",
+      "capacity": 50,
+      "on_hand": 20,
+      "active": true
+    },
+    {
+      "bin_code": "Z1-A01-R01-S1-B02",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B02",
+      "capacity": 50,
+      "on_hand": 0,
+      "active": true
+    },
+    {
+      "bin_code": "Z1-A01-R01-S1-B03",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B03",
+      "capacity": 50,
+      "on_hand": 15,
+      "active": true
+    },
+    {
+      "bin_code": "Z1-A01-R01-S1-B04",
+      "zone": "Z1",
+      "aisle": "A01",
+      "rack": "R01",
+      "shelf": "S1",
+      "bin": "B04",
+      "capacity": 50,
+      "on_hand": 40,
+      "active": true
+    }
+  ],
+  "suppliers": [
+    {
+      "supplier_id": "SUP-A",
+      "name": "Alpha Industrial Supply",
+      "contact_name": "Nguyen Van An",
+      "email": "orders@sup-a.vn",
+      "phone": "+84-24-1111-2222",
+      "lead_time_days": 7,
+      "active": true
+    },
+    {
+      "supplier_id": "SUP-B",
+      "name": "Beta Components",
+      "contact_name": "Tran Thi Binh",
+      "email": "orders@sup-b.vn",
+      "phone": "+84-24-3333-4444",
+      "lead_time_days": 5,
+      "active": true
+    },
+    {
+      "supplier_id": "SUP-C",
+      "name": "Gamma Legacy Vendor",
+      "contact_name": "Le Van Cuong",
+      "email": "sales@sup-c.vn",
+      "phone": "+84-24-5555-6666",
+      "lead_time_days": 21,
+      "active": false
+    }
+  ],
+  "demand_history": {
+    "SKU-WIDGET-01": [
+      {
+        "date": "2026-10-13",
+        "quantity": 10
+      },
+      {
+        "date": "2026-10-14",
+        "quantity": 10
+      },
+      {
+        "date": "2026-10-15",
+        "quantity": 10
+      },
+      {
+        "date": "2026-10-16",
+        "quantity": 10
+      },
+      {
+        "date": "2026-10-17",
+        "quantity": 10
+      },
+      {
+        "date": "2026-10-18",
+        "quantity": 10
+      },
+      {
+        "date": "2026-10-19",
+        "quantity": 10
+      }
+    ],
+    "SKU-WIDGET-02": [
+      {
+        "date": "2026-10-13",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-14",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-15",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-16",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-17",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-18",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-19",
+        "quantity": 1
+      }
+    ],
+    "SKU-NO-IMG-01": [
+      {
+        "date": "2026-10-13",
+        "quantity": 2
+      },
+      {
+        "date": "2026-10-14",
+        "quantity": 2
+      },
+      {
+        "date": "2026-10-15",
+        "quantity": 2
+      },
+      {
+        "date": "2026-10-16",
+        "quantity": 2
+      },
+      {
+        "date": "2026-10-17",
+        "quantity": 2
+      },
+      {
+        "date": "2026-10-18",
+        "quantity": 2
+      },
+      {
+        "date": "2026-10-19",
+        "quantity": 2
+      }
+    ],
+    "SKU-PACK-01": [
+      {
+        "date": "2026-10-13",
+        "quantity": 4
+      },
+      {
+        "date": "2026-10-14",
+        "quantity": 4
+      },
+      {
+        "date": "2026-10-15",
+        "quantity": 4
+      },
+      {
+        "date": "2026-10-16",
+        "quantity": 4
+      },
+      {
+        "date": "2026-10-17",
+        "quantity": 4
+      },
+      {
+        "date": "2026-10-18",
+        "quantity": 4
+      },
+      {
+        "date": "2026-10-19",
+        "quantity": 4
+      }
+    ],
+    "SKU-SEAL-02": [
+      {
+        "date": "2026-10-13",
+        "quantity": 6
+      },
+      {
+        "date": "2026-10-14",
+        "quantity": 6
+      },
+      {
+        "date": "2026-10-15",
+        "quantity": 6
+      },
+      {
+        "date": "2026-10-16",
+        "quantity": 6
+      },
+      {
+        "date": "2026-10-17",
+        "quantity": 6
+      },
+      {
+        "date": "2026-10-18",
+        "quantity": 6
+      },
+      {
+        "date": "2026-10-19",
+        "quantity": 6
+      }
+    ],
+    "SKU-NOSUP-01": [
+      {
+        "date": "2026-10-13",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-14",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-15",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-16",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-17",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-18",
+        "quantity": 1
+      },
+      {
+        "date": "2026-10-19",
+        "quantity": 1
+      }
+    ]
+  },
+  "purchase_orders": [
+    {
+      "po_id": "PO-2026-0001",
+      "supplier_id": "SUP-B",
+      "status": "RECEIVED",
+      "created_by": "controller@wrhm.vn",
+      "created_at": "2026-09-01T09:15:00",
+      "submitted_at": "2026-09-01T10:00:00",
+      "approved_by": "manager@wrhm.vn",
+      "approved_at": "2026-09-01T11:00:00",
+      "expected_delivery_date": "2026-09-10",
+      "received_at": "2026-09-10T08:30:00",
+      "rejection_reason": null,
+      "total_amount": 74.0,
+      "lines": [
+        {
+          "line_id": "POL-0001",
+          "sku_code": "SKU-PACK-01",
+          "quantity": 20,
+          "unit_price": 2.1
+        },
+        {
+          "line_id": "POL-0002",
+          "sku_code": "SKU-NO-IMG-01",
+          "quantity": 10,
+          "unit_price": 3.2
+        }
+      ],
+      "transmissions": [
+        {
+          "at": "2026-09-01T11:00:00",
+          "recipient": "orders@sup-b.vn",
+          "status": "SENT",
+          "attempts": 1,
+          "error": null
+        }
+      ],
+      "transmission_status": "SENT",
+      "flags": [],
+      "status_history": [
+        {
+          "status": "DRAFT",
+          "at": "2026-09-01T09:15:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "PENDING_APPROVAL",
+          "at": "2026-09-01T10:00:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "APPROVED",
+          "at": "2026-09-01T11:00:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "RECEIVED",
+          "at": "2026-09-10T08:30:00",
+          "actor": "manager@wrhm.vn"
+        }
+      ]
+    },
+    {
+      "po_id": "PO-2026-0002",
+      "supplier_id": "SUP-A",
+      "status": "CLOSED",
+      "created_by": "controller@wrhm.vn",
+      "created_at": "2026-08-10T08:05:00",
+      "submitted_at": "2026-08-10T09:00:00",
+      "approved_by": "manager@wrhm.vn",
+      "approved_at": "2026-08-10T09:45:00",
+      "expected_delivery_date": "2026-08-15",
+      "received_at": "2026-08-15T15:10:00",
+      "rejection_reason": null,
+      "total_amount": 625.0,
+      "lines": [
+        {
+          "line_id": "POL-0003",
+          "sku_code": "SKU-WIDGET-01",
+          "quantity": 50,
+          "unit_price": 12.5
+        }
+      ],
+      "transmissions": [
+        {
+          "at": "2026-08-10T09:45:00",
+          "recipient": "orders@sup-a.vn",
+          "status": "SENT",
+          "attempts": 1,
+          "error": null
+        }
+      ],
+      "transmission_status": "SENT",
+      "flags": [],
+      "status_history": [
+        {
+          "status": "DRAFT",
+          "at": "2026-08-10T08:05:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "PENDING_APPROVAL",
+          "at": "2026-08-10T09:00:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "APPROVED",
+          "at": "2026-08-10T09:45:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "CLOSED",
+          "at": "2026-08-15T15:10:00",
+          "actor": "manager@wrhm.vn"
+        }
+      ]
+    },
+    {
+      "po_id": "PO-2026-0003",
+      "supplier_id": "SUP-B",
+      "status": "SENT",
+      "created_by": "controller@wrhm.vn",
+      "created_at": "2026-10-18T14:20:00",
+      "submitted_at": "2026-10-18T15:00:00",
+      "approved_by": "manager@wrhm.vn",
+      "approved_at": "2026-10-18T16:10:00",
+      "expected_delivery_date": "2026-11-01",
+      "received_at": null,
+      "rejection_reason": null,
+      "total_amount": 180.0,
+      "lines": [
+        {
+          "line_id": "POL-0004",
+          "sku_code": "SKU-SEAL-02",
+          "quantity": 10,
+          "unit_price": 18.0
+        }
+      ],
+      "transmissions": [
+        {
+          "at": "2026-10-18T16:10:00",
+          "recipient": "orders@sup-b.vn",
+          "status": "SENT",
+          "attempts": 1,
+          "error": null
+        }
+      ],
+      "transmission_status": "SENT",
+      "flags": [],
+      "status_history": [
+        {
+          "status": "DRAFT",
+          "at": "2026-10-18T14:20:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "PENDING_APPROVAL",
+          "at": "2026-10-18T15:00:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "APPROVED",
+          "at": "2026-10-18T16:10:00",
+          "actor": "controller@wrhm.vn"
+        },
+        {
+          "status": "SENT",
+          "at": "2026-10-18T16:10:00",
+          "actor": "manager@wrhm.vn"
+        }
+      ]
+    }
+  ]
+}

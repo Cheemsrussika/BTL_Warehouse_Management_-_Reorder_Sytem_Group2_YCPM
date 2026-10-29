@@ -1,0 +1,5 @@
+bin_code,zone,aisle,rack,shelf,bin,capacity,on_hand,active
+Z1-A01-R01-S1-B01,Z1,A01,R01,S1,B01,50,20,True
+Z1-A01-R01-S1-B02,Z1,A01,R01,S1,B02,50,0,True
+Z1-A01-R01-S1-B03,Z1,A01,R01,S1,B03,50,15,True
+Z1-A01-R01-S1-B04,Z1,A01,R01,S1,B04,50,0,True

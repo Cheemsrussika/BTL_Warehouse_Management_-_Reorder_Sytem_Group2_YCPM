@@ -1,0 +1,8 @@
+MODULE 1 - TEST/REQUIREMENT ANNOTATION INVENTORY
+Date: 2026-10-29T14:57:09+07:00
+Command: AST scan of src/Module1/Test/test_module1.py
+------------------------------------------------------------------------
+Test functions found in source: 13
+Distinct test-case IDs in test docstrings: 13: TC-101, TC-102, TC-103, TC-104, TC-105, TC-107, TC-108, TC-109, TC-110, TC-111, TC-112, TC-113, TC-114
+Distinct FR/NFR IDs in test docstrings: 11: FR-101, FR-102, FR-103, FR-104, FR-105, FR-106, FR-107, NFR-101, NFR-102, NFR-103, NFR-104
+Note: This is a source-annotation inventory, not an authoritative RTM coverage calculation. Compare it with the module workbook.

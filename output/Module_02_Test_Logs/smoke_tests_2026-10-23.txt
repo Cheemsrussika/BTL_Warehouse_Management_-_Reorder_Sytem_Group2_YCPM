@@ -1,0 +1,12 @@
+MODULE 2 - LOCAL DEMO SMOKE CHECK
+Command: python verify_demo.py
+----
+OK | 1. View stock | Seeded available units: 30
+OK | 2. Receive goods | Received +5 LOT-QA
+OK | 3. Issue goods | Issued 4 from earliest received LOT-OLD
+OK | 4. Scan barcode | Registered barcode recognized
+OK | 5. Return goods | 2 returned units quarantined
+OK | 6. Bin transfer | Moved 3 LOT-OLD units A-01 -> B-01
+OK | 7. FIFO/FEFO preview | FIFO LOT-OLD; FEFO LOT-NEW
+OK | 8. Movement history | 4 confirmed movement entries (receipt/issue/return/transfer)
+Completed 8/8 workflow checks. 

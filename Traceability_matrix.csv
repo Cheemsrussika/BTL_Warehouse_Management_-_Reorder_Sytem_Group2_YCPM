@@ -1,0 +1,53 @@
+Requirement ID,Title,Type,Priority,Source (STK),Verification Method,Use Case(s),Test Case(s),Analysis Row(s),Change Request(s),Coverage,Test Status,Requirement Status
+FR-101,Account provisioning and login,Functional,Must,STK-04,Test,"UC-101, UC-102","TC-101, TC-102, TC-104, TC-109","TCA-01, TCA-02, TCA-03, TCA-04, TCA-05, TCA-08, TCA-09, TCA-15, TCA-16",-,Covered & executed,Passed,Approved
+FR-102,Role-based access control (RBAC),Functional,Must,STK-04,Test,"UC-101, UC-102, UC-103","TC-103, TC-104, TC-109","TCA-06, TCA-07, TCA-08, TCA-09, TCA-15, TCA-16",-,Covered & executed,Passed,Approved
+FR-103,Audit Trail & Compliance Logging,Functional,Should,STK-04,Test,"UC-102, UC-103, UC-105, UC-106","TC-104, TC-109, TC-113","TCA-08, TCA-09, TCA-15, TCA-16, TCA-20",-,Covered & executed,Passed,Approved
+FR-104,Manage product and supplier catalog,Functional,Must,STK-03,Test,UC-104,"TC-105, TC-110, TC-111","TCA-10, TCA-11, TCA-17, TCA-18",-,Covered & executed,Passed,Approved
+FR-105,Review and update SKU master data,Functional,Must,STK-03,Test,"UC-104, UC-105",TC-107,TCA-12,-,Covered & executed,Passed,Approved
+FR-106,Bin and location hierarchy management,Functional,Must ,STK-01,Test,UC-106,"TC-108, TC-112","TCA-13, TCA-14, TCA-19",-,Covered & executed,Passed,Approved
+FR-107,Item image icons in the stock list and search results,Functional,Could,STK-02,Demonstration,"UC-104, UC-107",TC-114,"TCA-21, TCA-22",-,Covered & executed,Passed,Approved
+NFR-101,Master Data Query and Auth Latency,Non-functional,Must,STK-04,Test,-,TC-101,"TCA-01, TCA-02, TCA-03",-,Covered & executed,Passed,Approved
+NFR-102,Role-Based Access Security,Non-functional,Must,STK-04,Test,-,TC-103,"TCA-06, TCA-07",-,Covered & executed,Passed,Approved
+NFR-103,Identifier Uniqueness and Consistency,Non-functional,Must,STK-03,Test,-,TC-105,"TCA-10, TCA-11",-,Covered & executed,Passed,Approved
+NFR-104,Audit Trail Immutability,Non-functional,Should,STK-01,Test,-,TC-113,TCA-20,-,Covered & executed,Passed,Approved
+FR-201,Create Draft Goods Receipt,Functional,Must,STK-02,Test,UC-201,TC-201,"TCA-201, TCA-202, TCA-203, TCA-276",CR-201,Covered & executed,Passed,Approved
+FR-202,Confirm Goods Receipt,Functional,Must,STK-01,Test,UC-201,"TC-202, TC-203","TCA-204, TCA-205, TCA-206, TCA-207, TCA-208, TCA-209, TCA-274, TCA-277",-,Covered & executed,Passed,Approved
+FR-203,Create Goods Issue Note,Functional,Must,STK-02,Test,UC-202,TC-204,"TCA-210, TCA-211, TCA-212",-,Covered & executed,Passed,Approved
+FR-204,Confirm Goods Issue,Functional,Must,STK-02,Test,UC-202,"TC-205, TC-206","TCA-213, TCA-214, TCA-215, TCA-216, TCA-217, TCA-218",-,Covered & executed,Passed,Approved
+FR-205,Identify Product by QR/Barcode,Functional,Must,STK-02,Test,UC-203,"TC-207, TC-208","TCA-219, TCA-220, TCA-221, TCA-222, TCA-223, TCA-224, TCA-279, TCA-280",CR-203,Covered & executed,Passed,Approved
+FR-206,Count Goods by Scanning,Functional,Must,STK-02,Test,UC-203,TC-209,"TCA-225, TCA-226, TCA-227",-,Covered & executed,Passed,Approved
+FR-207,Create Return Note,Functional,Must,STK-02,Test,UC-204,"TC-210, TC-211","TCA-228, TCA-229, TCA-230, TCA-231, TCA-232, TCA-233",-,Covered & executed,Passed,Approved
+FR-208,Classify Returned Goods,Functional,Must,STK-02,Test,UC-204,TC-212,"TCA-234, TCA-235, TCA-236",-,Covered & executed,Passed,Approved
+FR-209,Create Bin Transfer Note,Functional,Must,STK-02,Test,UC-205,TC-213,"TCA-237, TCA-238, TCA-239",-,Covered & executed,Passed,Approved
+FR-210,Confirm Bin Transfer,Functional,Must,STK-02,Test,UC-205,"TC-214, TC-215","TCA-240, TCA-241, TCA-242, TCA-243, TCA-244, TCA-245, TCA-275",-,Covered & executed,Passed,Approved
+FR-211,Validate Transfer Stock and Capacity,Functional,Must,STK-02,Test,UC-206,TC-216,"TCA-246, TCA-247, TCA-248, TCA-278",CR-202,Covered & executed,Passed,Approved
+FR-212,Check Transfer Permission,Functional,Must,STK-01,Test,UC-206,"TC-217, TC-218","TCA-249, TCA-250, TCA-251, TCA-252, TCA-253, TCA-254",-,Covered & executed,Passed,Approved
+FR-213,Recommend FIFO Batch,Functional,Should,STK-02,Test,UC-207,"TC-219, TC-220","TCA-255, TCA-256, TCA-257, TCA-258, TCA-259, TCA-260",-,Covered & executed,Passed,Approved
+FR-214,Allocate FIFO Stock,Functional,Should,STK-02,Test,UC-207,TC-221,"TCA-261, TCA-262, TCA-263",-,Covered & executed,Passed,Approved
+FR-215,Recommend FEFO Batch,Functional,Should,STK-02,Test,UC-208,"TC-222, TC-223","TCA-264, TCA-265, TCA-266, TCA-267, TCA-268, TCA-269",-,Covered & executed,Passed,Approved
+FR-216,Allocate FEFO Stock,Functional,Should,STK-02,Test,UC-208,TC-224,"TCA-270, TCA-271, TCA-272",-,Covered & executed,Passed,Approved
+NFR-201,Inventory search response time,Non-functional,Should,STK-02,Analysis,-,TC-225,TCA-273,-,Covered,Not Run,Approved
+NFR-202,No duplicate stock updates,Non-functional,Must,STK-03,Test,-,"TC-202, TC-215","TCA-204, TCA-205, TCA-206, TCA-243, TCA-244, TCA-245, TCA-274, TCA-275, TCA-277",-,Covered & executed,Passed,Approved
+FR-301,Real-Time Stock Visibility,Functional,Must,STK-03,Test,UC-301,"TC-301, TC-309","TCA-301, TCA-309, TCA-316",CR-302,Covered & executed,Passed,Approved
+FR-302,Order Stock Reservation,Functional,Must,STK-06,Test,UC-302,"TC-302, TC-309, TC-310","TCA-302, TCA-309, TCA-310, TCA-317, TCA-324, TCA-325",-,Covered & executed,Passed,Approved
+FR-303,Reason-Based Stock Adjustment,Functional,Must,STK-03,Test,UC-303,"TC-303, TC-310, TC-315","TCA-303, TCA-310, TCA-315, TCA-318, TCA-325",-,Covered & executed,Passed,Approved
+FR-304,Duplicate Transaction Prevention,Functional,Must,STK-03,Test,UC-304,"TC-304, TC-311","TCA-304, TCA-311, TCA-319, TCA-326",-,Covered & executed,Passed,Approved
+FR-305,Stock Transaction History,Functional,Should,STK-07,Inspection,UC-305,"TC-305, TC-312, TC-315","TCA-305, TCA-312, TCA-315, TCA-320",-,Covered & executed,Passed,Approved
+FR-306,Blind Count Sheet Generation,Functional,Must,STK-03,Test,UC-306,"TC-306, TC-313","TCA-306, TCA-313, TCA-321",-,Covered & executed,Passed,Approved
+FR-307,Count Submission & Discrepancy Calculation,Functional,Must,STK-02,Test,UC-307,TC-307,"TCA-307, TCA-322",CR-301,Covered & executed,Passed,Approved
+FR-308,Threshold-Based Count Reconciliation,Functional,Must,STK-03,Test,UC-308,"TC-308, TC-314","TCA-308, TCA-314, TCA-323",CR-301,Covered & executed,Passed,Approved
+NFR-301,Real-Time ATP Latency,Non-functional,Must,STK-06,Test,-,TC-309,TCA-309,-,Covered & executed,Passed,Approved
+NFR-302,Concurrency & Locking,Non-functional,Must,STK-03,Test,-,TC-310,"TCA-310, TCA-325",-,Covered & executed,Passed,Approved
+NFR-303,Idempotency Key Retention,Non-functional,Must,STK-03,Analysis,-,TC-311,TCA-311,-,Covered & executed,Passed,Approved
+NFR-304,Immutable Audit Ledger,Non-functional,Must,STK-04,Inspection,-,TC-312,TCA-312,-,Covered & executed,Passed,Approved
+NFR-305,Backend Blind Count Masking,Non-functional,Must,STK-07,Demonstration,-,TC-313,TCA-313,-,Covered & executed,Passed,Approved
+FR-401,Configure SKU replenishment policy,Functional,Must,STK-03,Test,UC-401,"TC-401, TC-402","TCA-401, TCA-402",-,Covered & executed,Passed,Approved
+FR-402,Monitor available stock against the reorder point,Functional,Must,STK-03,Test,UC-402,"TC-403, TC-404","TCA-403, TCA-404",CR-402,Covered & executed,Passed,Approved
+FR-403,Execute the automated replenishment cycle,Functional,Must,STK-03,Test,"UC-402, UC-403",TC-405,TCA-405,-,Covered & executed,Passed,Approved
+FR-404,"Calculate the suggested order quantity from safety stock, lead time and MOQ",Functional,Must,STK-03,Test,"UC-403, UC-404","TC-406, TC-407, TC-408","TCA-406, TCA-407, TCA-408",CR-401,Covered & executed,Passed,Approved
+FR-405,Review reorder suggestions and create purchase orders,Functional,Must,STK-03,Test,"UC-404, UC-405","TC-409, TC-410, TC-411","TCA-409, TCA-410, TCA-411, TCA-412, TCA-413",CR-402,Covered & executed,Passed,Approved
+NFR-401,Replenishment cycle throughput,Non-functional,Must,STK-04,Test,-,TC-413,TCA-415,-,Covered & executed,Passed,Approved
+NFR-402,Low-stock alert latency,Non-functional,Must,STK-03,Test,-,TC-414,TCA-416,-,Covered & executed,Passed,Approved
+NFR-403,Reorder quantity correctness,Non-functional,Must,STK-03,Test,-,-,-,-,Not covered,-,Approved
+NFR-404,Cycle idempotency,Non-functional,Must,STK-03,Test,-,TC-412,TCA-414,-,Covered & executed,Passed,Approved
+NFR-405,Suggestion workflow responsiveness,Non-functional,Should,STK-03,Test,-,TC-415,TCA-417,-,Covered & executed,Passed,Approved

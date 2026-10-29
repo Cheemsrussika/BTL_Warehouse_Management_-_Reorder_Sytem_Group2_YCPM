@@ -1,0 +1,7 @@
+MODULE 2 — RTM COVERAGE REPORT
+Functional requirements: 16
+Use cases: 8
+Designed test cases: 24
+Requirements linked to tests: 16/16
+Design traceability coverage: 100%
+Integrated execution: NOT RUN (not a pass rate)

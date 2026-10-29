@@ -1,0 +1,8 @@
+MODULE 4 - TEST/REQUIREMENT ANNOTATION INVENTORY
+Date: 2026-10-29T14:57:10+07:00
+Command: AST scan of src/Module4/Test/test_module4.py
+------------------------------------------------------------------------
+Test functions found in source: 15
+Distinct test-case IDs in test docstrings: 15: TC-401, TC-402, TC-403, TC-404, TC-405, TC-406, TC-407, TC-408, TC-409, TC-410, TC-411, TC-412, TC-413, TC-414, TC-415
+Distinct FR/NFR IDs in test docstrings: 9: FR-401, FR-402, FR-403, FR-404, FR-405, NFR-401, NFR-402, NFR-404, NFR-405
+Note: This is a source-annotation inventory, not an authoritative RTM coverage calculation. Compare it with the module workbook.

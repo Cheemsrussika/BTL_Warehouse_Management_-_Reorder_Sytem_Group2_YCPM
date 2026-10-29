@@ -1,0 +1,16 @@
+WAREHOUSE INVENTORY AND REORDER SYSTEM — MODULE 2
+Local demo (Python standard library + SQLite).
+
+1. Current stock  2. Goods receipt  3. Goods issue  4. Scan code
+5. Goods return   6. Bin transfer   7. FIFO/FEFO preview  8. History  0. Exit
+Select [1]: 
+ SKU     LOT            BIN    QTY  CONDITION     EXPIRY
+ --------------------------------------------------------------------
+ SKU001  LOT-NEW        A-01   70   AVAILABLE     2027-03-01
+ SKU001  LOT-OLD        A-01   30   AVAILABLE     2027-09-01
+ SKU002  LOT-PAPER      B-01   40   AVAILABLE     -
+ SKU003  LOT-MILK       C-01   20   AVAILABLE     2026-12-01
+
+1. Current stock  2. Goods receipt  3. Goods issue  4. Scan code
+5. Goods return   6. Bin transfer   7. FIFO/FEFO preview  8. History  0. Exit
+Select [1]: Goodbye!

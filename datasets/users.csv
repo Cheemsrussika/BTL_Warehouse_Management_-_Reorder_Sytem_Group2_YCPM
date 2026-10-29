@@ -1,0 +1,5 @@
+user_id,email,role,is_active,password
+U-ADM,admin@wrhm.vn,IT_ADMIN,True,AdminPass123!
+U-MGR,manager@wrhm.vn,WAREHOUSE_MANAGER,True,ManagerPass123!
+U-STA,staff01@wrhm.vn,WAREHOUSE_STAFF,True,StaffPass123!
+U-CTL,controller@wrhm.vn,INVENTORY_CONTROLLER,True,ControllerPass123!

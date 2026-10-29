@@ -1,0 +1,5 @@
+MODULE 1 - SERVICE SMOKE CHECK
+Date: 2026-10-29T14:57:09+07:00
+Command: Python service-level check (no web server or interactive CLI required)
+------------------------------------------------------------------------
+PASS | TC-101 smoke | seeded staff login and catalog permission

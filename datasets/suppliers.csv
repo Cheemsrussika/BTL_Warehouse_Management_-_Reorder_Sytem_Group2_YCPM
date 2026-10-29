@@ -1,0 +1,4 @@
+supplier_id,name,contact_name,email,phone,lead_time_days,active
+SUP-A,Alpha Industrial Supply,Nguyen Van An,orders@sup-a.vn,+84-24-1111-2222,7,True
+SUP-B,Beta Components,Tran Thi Binh,orders@sup-b.vn,+84-24-3333-4444,5,True
+SUP-C,Gamma Legacy Vendor,Le Van Cuong,sales@sup-c.vn,+84-24-5555-6666,21,False
