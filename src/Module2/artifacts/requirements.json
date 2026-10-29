@@ -1,0 +1,178 @@
+[
+  {
+    "id": "FR-201",
+    "f": "F-201",
+    "uc": "UC-201",
+    "en": "The system allows staff to create a receiving note with product, quantity and location; batch and expiry are recorded when relevant.",
+    "vi": "Hệ thống cho phép lập phiếu nhập với mã hàng, số lượng, vị trí; ghi mã lô và hạn sử dụng nếu mặt hàng có quản lý thông tin này.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-202",
+    "f": "F-201",
+    "uc": "UC-201",
+    "en": "The system checks the related purchase order and allows receipt confirmation; the received quantity is recorded once.",
+    "vi": "Hệ thống kiểm tra đơn mua liên quan và cho xác nhận nhập; sau khi xác nhận, số lượng nhập được ghi nhận một lần.",
+    "priority": "Must",
+    "stakeholder": "STK-202",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-203",
+    "f": "F-202",
+    "uc": "UC-202",
+    "en": "The system allows staff to create an issue note with product, quantity and destination.",
+    "vi": "Hệ thống cho phép tạo phiếu xuất kho gồm mã hàng, số lượng và nơi nhận hàng.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-204",
+    "f": "F-202",
+    "uc": "UC-202",
+    "en": "The system checks available stock before confirming an issue and records the outgoing quantity.",
+    "vi": "Hệ thống kiểm tra tồn kho khả dụng trước khi xác nhận xuất và ghi nhận số lượng xuất kho.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-205",
+    "f": "F-203",
+    "uc": "UC-203",
+    "en": "When staff scans a barcode, SKU or lot code, the system shall identify a unique product; if one lot code belongs to multiple SKUs, it shall request more information rather than selecting a random product.",
+    "vi": "Khi nhân viên quét Barcode, SKU hoặc mã lô, hệ thống xác định sản phẩm duy nhất; nếu một mã lô thuộc nhiều SKU thì yêu cầu thêm thông tin, không tự chọn sai sản phẩm.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "A registered code identifies the correct product. An ambiguous lot code does not select a product or increase a count.",
+    "acceptance_vi": "Mã hợp lệ xác định đúng sản phẩm. Mã lô trùng giữa nhiều SKU không được tự chọn sản phẩm hay tăng lượt đếm."
+  },
+  {
+    "id": "FR-206",
+    "f": "F-203",
+    "uc": "UC-203",
+    "en": "The system counts scanned items during the current operation and compares them with the related note.",
+    "vi": "Hệ thống đếm số lượng hàng được quét trong phiên thao tác và đối chiếu với phiếu đang xử lý.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-207",
+    "f": "F-204",
+    "uc": "UC-204",
+    "en": "The system allows staff to create a return note and record the quantity and reason for return.",
+    "vi": "Hệ thống cho phép tạo phiếu nhận hàng trả lại và ghi nhận số lượng cùng lý do trả hàng.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-208",
+    "f": "F-204",
+    "uc": "UC-204",
+    "en": "The system allows returned goods to be classified as accepted or defective and prevents defective goods from becoming available stock.",
+    "vi": "Hệ thống cho phép phân loại hàng trả lại thành hàng đạt và hàng lỗi, tránh đưa hàng lỗi vào tồn có thể xuất.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-209",
+    "f": "F-205",
+    "uc": "UC-205",
+    "en": "The system allows staff to create a transfer note with source bin, destination bin, and quantity.",
+    "vi": "Hệ thống cho phép lập phiếu chuyển hàng từ ô nguồn sang ô đích, kèm số lượng cần chuyển.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-210",
+    "f": "F-205",
+    "uc": "UC-205",
+    "en": "When a transfer is confirmed, the system decreases source-bin stock and increases destination-bin stock once.",
+    "vi": "Khi xác nhận chuyển hàng, hệ thống giảm số lượng ở ô nguồn và tăng ở ô đích một lần.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-211",
+    "f": "F-206",
+    "uc": "UC-206",
+    "en": "The system checks source stock, destination-bin validity, and remaining capacity before a transfer.",
+    "vi": "Hệ thống kiểm tra ô nguồn có đủ hàng, ô đích hợp lệ và còn sức chứa trước khi chuyển.",
+    "priority": "Must",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-212",
+    "f": "F-206",
+    "uc": "UC-206",
+    "en": "The system allows only authorized users to confirm transfers in an allowed status.",
+    "vi": "Hệ thống chỉ cho người có quyền xác nhận phiếu chuyển ở trạng thái cho phép.",
+    "priority": "Must",
+    "stakeholder": "STK-202",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-213",
+    "f": "F-207",
+    "uc": "UC-207",
+    "en": "Under FIFO, the system recommends the eligible batch with the earliest receiving date.",
+    "vi": "Khi xuất theo FIFO, hệ thống đề xuất lô hợp lệ có ngày nhập sớm nhất.",
+    "priority": "Should",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-214",
+    "f": "F-207",
+    "uc": "UC-207",
+    "en": "If one FIFO batch is insufficient, the system allocates the remaining quantity from the next eligible batch.",
+    "vi": "Nếu một lô FIFO không đủ hàng, hệ thống tiếp tục phân bổ số lượng từ lô tiếp theo.",
+    "priority": "Should",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-215",
+    "f": "F-208",
+    "uc": "UC-208",
+    "en": "Under FEFO, the system recommends the eligible batch with the nearest expiration date.",
+    "vi": "Khi xuất theo FEFO, hệ thống đề xuất lô hợp lệ có hạn sử dụng gần nhất.",
+    "priority": "Should",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  },
+  {
+    "id": "FR-216",
+    "f": "F-208",
+    "uc": "UC-208",
+    "en": "The system allocates stock using FEFO; for batches with the same expiry date, the earlier received batch has priority.",
+    "vi": "Hệ thống phân bổ hàng theo FEFO; nếu hai lô cùng hạn sử dụng thì ưu tiên lô nhập sớm hơn.",
+    "priority": "Should",
+    "stakeholder": "STK-201",
+    "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+    "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+  }
+]

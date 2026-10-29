@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-10-29T14:31:41",
+  "scope": "Local standalone demo; not integrated team testing",
+  "results": [
+    {
+      "workflow": "1. View stock",
+      "ok": true,
+      "note": "Seeded available units: 30"
+    },
+    {
+      "workflow": "2. Receive goods",
+      "ok": true,
+      "note": "Received +5 LOT-QA"
+    },
+    {
+      "workflow": "3. Issue goods",
+      "ok": true,
+      "note": "Issued 4 from earliest received LOT-OLD"
+    },
+    {
+      "workflow": "4. Scan barcode",
+      "ok": true,
+      "note": "Registered barcode recognized"
+    },
+    {
+      "workflow": "5. Return goods",
+      "ok": true,
+      "note": "2 returned units quarantined"
+    },
+    {
+      "workflow": "6. Bin transfer",
+      "ok": true,
+      "note": "Moved 3 LOT-OLD units A-01 -> B-01"
+    },
+    {
+      "workflow": "7. FIFO/FEFO preview",
+      "ok": true,
+      "note": "FIFO LOT-OLD; FEFO LOT-NEW"
+    },
+    {
+      "workflow": "8. Movement history",
+      "ok": true,
+      "note": "4 confirmed movement entries (receipt/issue/return/transfer)"
+    }
+  ]
+}

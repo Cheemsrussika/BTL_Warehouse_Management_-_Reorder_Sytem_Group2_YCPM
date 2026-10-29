@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block heading %}Inventory Overview{% endblock %}{% block content %}
+<div class="stats">{% for k,v in counters.items() %}<div class="stat"><span>{{k|title}}</span><b>{{v}}</b></div>{% endfor %}</div>
+<section><h2>Current stock by SKU, lot and bin</h2><p class="hint">Quarantined items are shown but are not available for issue.</p>
+<div class="scroll"><table><tr><th>SKU</th><th>Product</th><th>Lot</th><th>Bin</th><th>Qty</th><th>Received</th><th>Expires</th><th>Condition</th></tr>
+{% for s in stocks %}<tr><td>{{s.sku}}</td><td>{{s.name}}</td><td>{{s.lot}}</td><td>{{s.bin_id}}</td><td>{{s.qty}}</td><td>{{s.received_date}}</td><td>{{s.expiry_date or '—'}}</td><td><span class="tag">{{s.condition}}</span></td></tr>{% endfor %}</table></div></section>
+<section><h2>Recent movements (inventory handoff)</h2><div class="scroll"><table><tr><th>Time</th><th>Event</th><th>SKU</th><th>Qty</th><th>From</th><th>To</th><th>Lot</th><th>Ref</th></tr>
+{% for r in moves %}<tr><td>{{r.created_at}}</td><td>{{r.event}}</td><td>{{r.sku}}</td><td>{{r.qty}}</td><td>{{r.source_bin or '—'}}</td><td>{{r.dest_bin or '—'}}</td><td>{{r.lot}}</td><td>{{r.reference}}</td></tr>{% endfor %}</table></div></section>{% endblock %}

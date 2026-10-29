@@ -1,0 +1,25 @@
+MODULE 2 — RTM COVERAGE REPORT
+Functional requirements: 16
+Use cases: 8
+Designed test cases: 24
+Requirements linked to tests: 16/16
+Design traceability coverage: 100%
+Integrated execution: NOT RUN (not a pass rate)
+
+FR -> UC -> Test Case
+FR-201 -> UC-201 -> TC-201
+FR-202 -> UC-201 -> TC-202, TC-203
+FR-203 -> UC-202 -> TC-204
+FR-204 -> UC-202 -> TC-205, TC-206
+FR-205 -> UC-203 -> TC-207, TC-208
+FR-206 -> UC-203 -> TC-209
+FR-207 -> UC-204 -> TC-210, TC-211
+FR-208 -> UC-204 -> TC-212
+FR-209 -> UC-205 -> TC-213
+FR-210 -> UC-205 -> TC-214, TC-215
+FR-211 -> UC-206 -> TC-216
+FR-212 -> UC-206 -> TC-217, TC-218
+FR-213 -> UC-207 -> TC-219, TC-220
+FR-214 -> UC-207 -> TC-221
+FR-215 -> UC-208 -> TC-222, TC-223
+FR-216 -> UC-208 -> TC-224

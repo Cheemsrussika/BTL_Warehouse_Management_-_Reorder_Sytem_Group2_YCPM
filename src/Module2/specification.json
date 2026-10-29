@@ -1,0 +1,1243 @@
+{
+  "project": "Warehouse Inventory and Reorder System",
+  "module": "Module 2 – Warehouse Operations & Movements",
+  "course": "CSE703095 – Software Requirements",
+  "version": "0.4 (reviewed draft for group integration)",
+  "groups": [
+    {
+      "id": "GF-201",
+      "name": "Inbound and Outbound Operations",
+      "f_range": "F-201 – F-204",
+      "vi": "Quản lý nhập và xuất kho"
+    },
+    {
+      "id": "GF-202",
+      "name": "Internal Movements and Stock Rotation",
+      "f_range": "F-205 – F-208",
+      "vi": "Quản lý dịch chuyển và luân chuyển hàng"
+    }
+  ],
+  "functions": [
+    {
+      "id": "F-201",
+      "en": "Goods Receiving",
+      "vi": "Nhập hàng vào kho",
+      "desc_en": "Staff create a receiving note and confirm received quantities.",
+      "desc_vi": "Nhân viên tạo phiếu nhập và xác nhận số lượng hàng nhận.",
+      "group": "GF-201"
+    },
+    {
+      "id": "F-202",
+      "en": "Goods Issuing",
+      "vi": "Xuất hàng khỏi kho",
+      "desc_en": "Staff create an issue note, check available stock, and confirm dispatch.",
+      "desc_vi": "Nhân viên lập phiếu xuất, kiểm tra số lượng và xác nhận xuất.",
+      "group": "GF-201"
+    },
+    {
+      "id": "F-203",
+      "en": "QR/Barcode Scanning",
+      "vi": "Quét mã QR/Barcode",
+      "desc_en": "Scan codes to identify and count goods during receiving or issuing.",
+      "desc_vi": "Quét mã để nhận diện sản phẩm và kiểm đếm khi nhập hoặc xuất.",
+      "group": "GF-201"
+    },
+    {
+      "id": "F-204",
+      "en": "Returned Goods Handling",
+      "vi": "Nhận hàng trả lại",
+      "desc_en": "Receive returned products, record reasons, and classify their condition.",
+      "desc_vi": "Tiếp nhận hàng bị trả lại, ghi lý do và phân loại hàng.",
+      "group": "GF-201"
+    },
+    {
+      "id": "F-205",
+      "en": "Internal Bin Transfer",
+      "vi": "Điều chuyển hàng giữa các ô",
+      "desc_en": "Create and confirm goods movements between warehouse bins.",
+      "desc_vi": "Tạo phiếu và xác nhận di chuyển hàng giữa các vị trí trong kho.",
+      "group": "GF-202"
+    },
+    {
+      "id": "F-206",
+      "en": "Transfer Validation",
+      "vi": "Kiểm tra điều kiện điều chuyển",
+      "desc_en": "Check quantities, locations, and user permissions before transfer.",
+      "desc_vi": "Kiểm tra số lượng, vị trí và quyền trước khi cho chuyển hàng.",
+      "group": "GF-202"
+    },
+    {
+      "id": "F-207",
+      "en": "FIFO Stock Rotation",
+      "vi": "Xuất hàng theo FIFO",
+      "desc_en": "Recommend earlier received batches and allocate issue quantities.",
+      "desc_vi": "Đề xuất lấy lô nhập trước và phân bổ số lượng xuất.",
+      "group": "GF-202"
+    },
+    {
+      "id": "F-208",
+      "en": "FEFO Stock Rotation",
+      "vi": "Xuất hàng theo FEFO",
+      "desc_en": "Recommend batches expiring soonest and allocate issue quantities.",
+      "desc_vi": "Đề xuất lấy lô có hạn sử dụng gần nhất và phân bổ hàng xuất.",
+      "group": "GF-202"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "FR-201",
+      "f": "F-201",
+      "uc": "UC-201",
+      "en": "The system allows staff to create a receiving note with product, quantity and location; batch and expiry are recorded when relevant.",
+      "vi": "Hệ thống cho phép lập phiếu nhập với mã hàng, số lượng, vị trí; ghi mã lô và hạn sử dụng nếu mặt hàng có quản lý thông tin này.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-202",
+      "f": "F-201",
+      "uc": "UC-201",
+      "en": "The system checks the related purchase order and allows receipt confirmation; the received quantity is recorded once.",
+      "vi": "Hệ thống kiểm tra đơn mua liên quan và cho xác nhận nhập; sau khi xác nhận, số lượng nhập được ghi nhận một lần.",
+      "priority": "Must",
+      "stakeholder": "STK-202",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-203",
+      "f": "F-202",
+      "uc": "UC-202",
+      "en": "The system allows staff to create an issue note with product, quantity and destination.",
+      "vi": "Hệ thống cho phép tạo phiếu xuất kho gồm mã hàng, số lượng và nơi nhận hàng.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-204",
+      "f": "F-202",
+      "uc": "UC-202",
+      "en": "The system checks available stock before confirming an issue and records the outgoing quantity.",
+      "vi": "Hệ thống kiểm tra tồn kho khả dụng trước khi xác nhận xuất và ghi nhận số lượng xuất kho.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-205",
+      "f": "F-203",
+      "uc": "UC-203",
+      "en": "When staff scans a barcode, SKU or lot code, the system shall identify a unique product; if one lot code belongs to multiple SKUs, it shall request more information rather than selecting a random product.",
+      "vi": "Khi nhân viên quét Barcode, SKU hoặc mã lô, hệ thống xác định sản phẩm duy nhất; nếu một mã lô thuộc nhiều SKU thì yêu cầu thêm thông tin, không tự chọn sai sản phẩm.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "A registered code identifies the correct product. An ambiguous lot code does not select a product or increase a count.",
+      "acceptance_vi": "Mã hợp lệ xác định đúng sản phẩm. Mã lô trùng giữa nhiều SKU không được tự chọn sản phẩm hay tăng lượt đếm."
+    },
+    {
+      "id": "FR-206",
+      "f": "F-203",
+      "uc": "UC-203",
+      "en": "The system counts scanned items during the current operation and compares them with the related note.",
+      "vi": "Hệ thống đếm số lượng hàng được quét trong phiên thao tác và đối chiếu với phiếu đang xử lý.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-207",
+      "f": "F-204",
+      "uc": "UC-204",
+      "en": "The system allows staff to create a return note and record the quantity and reason for return.",
+      "vi": "Hệ thống cho phép tạo phiếu nhận hàng trả lại và ghi nhận số lượng cùng lý do trả hàng.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-208",
+      "f": "F-204",
+      "uc": "UC-204",
+      "en": "The system allows returned goods to be classified as accepted or defective and prevents defective goods from becoming available stock.",
+      "vi": "Hệ thống cho phép phân loại hàng trả lại thành hàng đạt và hàng lỗi, tránh đưa hàng lỗi vào tồn có thể xuất.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-209",
+      "f": "F-205",
+      "uc": "UC-205",
+      "en": "The system allows staff to create a transfer note with source bin, destination bin, and quantity.",
+      "vi": "Hệ thống cho phép lập phiếu chuyển hàng từ ô nguồn sang ô đích, kèm số lượng cần chuyển.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-210",
+      "f": "F-205",
+      "uc": "UC-205",
+      "en": "When a transfer is confirmed, the system decreases source-bin stock and increases destination-bin stock once.",
+      "vi": "Khi xác nhận chuyển hàng, hệ thống giảm số lượng ở ô nguồn và tăng ở ô đích một lần.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-211",
+      "f": "F-206",
+      "uc": "UC-206",
+      "en": "The system checks source stock, destination-bin validity, and remaining capacity before a transfer.",
+      "vi": "Hệ thống kiểm tra ô nguồn có đủ hàng, ô đích hợp lệ và còn sức chứa trước khi chuyển.",
+      "priority": "Must",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-212",
+      "f": "F-206",
+      "uc": "UC-206",
+      "en": "The system allows only authorized users to confirm transfers in an allowed status.",
+      "vi": "Hệ thống chỉ cho người có quyền xác nhận phiếu chuyển ở trạng thái cho phép.",
+      "priority": "Must",
+      "stakeholder": "STK-202",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-213",
+      "f": "F-207",
+      "uc": "UC-207",
+      "en": "Under FIFO, the system recommends the eligible batch with the earliest receiving date.",
+      "vi": "Khi xuất theo FIFO, hệ thống đề xuất lô hợp lệ có ngày nhập sớm nhất.",
+      "priority": "Should",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-214",
+      "f": "F-207",
+      "uc": "UC-207",
+      "en": "If one FIFO batch is insufficient, the system allocates the remaining quantity from the next eligible batch.",
+      "vi": "Nếu một lô FIFO không đủ hàng, hệ thống tiếp tục phân bổ số lượng từ lô tiếp theo.",
+      "priority": "Should",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-215",
+      "f": "F-208",
+      "uc": "UC-208",
+      "en": "Under FEFO, the system recommends the eligible batch with the nearest expiration date.",
+      "vi": "Khi xuất theo FEFO, hệ thống đề xuất lô hợp lệ có hạn sử dụng gần nhất.",
+      "priority": "Should",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    },
+    {
+      "id": "FR-216",
+      "f": "F-208",
+      "uc": "UC-208",
+      "en": "The system allocates stock using FEFO; for batches with the same expiry date, the earlier received batch has priority.",
+      "vi": "Hệ thống phân bổ hàng theo FEFO; nếu hai lô cùng hạn sử dụng thì ưu tiên lô nhập sớm hơn.",
+      "priority": "Should",
+      "stakeholder": "STK-201",
+      "acceptance_en": "The described action is completed correctly when valid; invalid input is rejected without changing inventory.",
+      "acceptance_vi": "Khi dữ liệu hợp lệ, thao tác thực hiện đúng; dữ liệu không hợp lệ bị từ chối và không làm thay đổi tồn kho."
+    }
+  ],
+  "use_cases": [
+    {
+      "id": "UC-201",
+      "en": "Receive Goods",
+      "vi": "Nhập hàng",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "Warehouse staff is using an approved purchase order; SKU and bin exist.",
+      "pre_vi": "Nhân viên kho có đơn mua đã được duyệt, mã hàng và ô chứa hợp lệ.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Open Goods Receiving.",
+        "Choose a purchase order and enter received goods.",
+        "Check batch/expiry information when needed.",
+        "Confirm the receipt."
+      ],
+      "steps_vi": [
+        "Mở mục Nhập kho.",
+        "Chọn đơn mua và nhập thông tin hàng nhận.",
+        "Kiểm tra thông tin lô/hạn dùng nếu có.",
+        "Xác nhận nhập hàng."
+      ],
+      "extension_en": "Missing purchase order, invalid quantity, full bin or an expired item → show an error; do not confirm.",
+      "extension_vi": "Đơn mua không hợp lệ, số lượng sai, ô đích đầy hoặc hàng đã hết hạn → báo lỗi và không xác nhận.",
+      "frs": [
+        "FR-201",
+        "FR-202"
+      ]
+    },
+    {
+      "id": "UC-202",
+      "en": "Issue Goods",
+      "vi": "Xuất hàng",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "Warehouse staff is working with available stock.",
+      "pre_vi": "Nhân viên kho đang xử lý hàng còn tồn khả dụng.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Open Goods Issuing.",
+        "Select products and enter an issue quantity.",
+        "Check available stock.",
+        "Confirm the issue."
+      ],
+      "steps_vi": [
+        "Mở mục Xuất kho.",
+        "Chọn hàng hóa và nhập số lượng xuất.",
+        "Kiểm tra tồn kho.",
+        "Xác nhận xuất."
+      ],
+      "extension_en": "Insufficient or ineligible stock → refuse confirmation; do not deduct inventory.",
+      "extension_vi": "Không đủ tồn khả dụng hoặc hàng không hợp lệ → từ chối xuất và không trừ tồn.",
+      "frs": [
+        "FR-203",
+        "FR-204"
+      ]
+    },
+    {
+      "id": "UC-203",
+      "en": "Scan and Count Goods",
+      "vi": "Quét mã và kiểm đếm",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "A registered barcode or SKU may be scanned using a keyboard/scanner device.",
+      "pre_vi": "Có thiết bị nhập mã quét, hàng hóa được quản lý theo SKU hoặc mã vạch.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Open a receiving or issue note.",
+        "Scan the product QR code or barcode.",
+        "Review the product and scanned count."
+      ],
+      "steps_vi": [
+        "Mở phiếu nhập hoặc xuất.",
+        "Quét QR/Barcode trên sản phẩm.",
+        "Xem thông tin sản phẩm và số lượng đã quét."
+      ],
+      "extension_en": "Unknown, mismatched or ambiguous lot code → show an error or request the expected SKU; do not increase the count.",
+      "extension_vi": "Mã lạ, không khớp hoặc mã lô trùng nhiều SKU → báo lỗi hoặc yêu cầu chọn SKU dự kiến; không tăng lượt đếm.",
+      "frs": [
+        "FR-205",
+        "FR-206"
+      ]
+    },
+    {
+      "id": "UC-204",
+      "en": "Handle Returned Goods",
+      "vi": "Xử lý hàng trả lại",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "Warehouse staff can record a return for a registered SKU.",
+      "pre_vi": "Nhân viên kho cần ghi nhận hàng trả có SKU hợp lệ.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Open Returns.",
+        "Enter product, quantity, and return reason.",
+        "Inspect and classify the returned goods.",
+        "Save the result."
+      ],
+      "steps_vi": [
+        "Mở mục Hàng trả lại.",
+        "Nhập thông tin hàng, số lượng và lý do.",
+        "Kiểm tra và chọn tình trạng hàng.",
+        "Lưu kết quả xử lý."
+      ],
+      "extension_en": "Invalid quantity or full bin → reject; damaged goods are quarantined.",
+      "extension_vi": "Số lượng sai hoặc ô đích đầy → từ chối; hàng lỗi đưa vào cách ly.",
+      "frs": [
+        "FR-207",
+        "FR-208"
+      ]
+    },
+    {
+      "id": "UC-205",
+      "en": "Transfer Between Bins",
+      "vi": "Chuyển hàng giữa các ô chứa",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "Source/destination bins and the SKU exist.",
+      "pre_vi": "Ô nguồn, ô đích và hàng hóa đã tồn tại.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Open Bin Transfer.",
+        "Select source, destination, and quantity.",
+        "Save and confirm the transfer.",
+        "Check the bin quantities afterward."
+      ],
+      "steps_vi": [
+        "Mở mục Chuyển vị trí.",
+        "Chọn ô nguồn, ô đích và số lượng.",
+        "Lưu phiếu chuyển và xác nhận.",
+        "Kiểm tra vị trí sau khi chuyển."
+      ],
+      "extension_en": "Same bins, insufficient stock or full destination → refuse confirmation.",
+      "extension_vi": "Hai ô giống nhau, nguồn thiếu hàng hoặc đích đầy → từ chối chuyển.",
+      "frs": [
+        "FR-209",
+        "FR-210"
+      ]
+    },
+    {
+      "id": "UC-206",
+      "en": "Validate a Transfer",
+      "vi": "Kiểm tra điều kiện chuyển kho",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "A draft stock transfer is present.",
+      "pre_vi": "Có phiếu chuyển kho ở trạng thái nháp.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Choose a pending transfer.",
+        "Check source stock and destination location.",
+        "Check the user permission.",
+        "Approve or reject the transfer."
+      ],
+      "steps_vi": [
+        "Chọn phiếu chuyển đang chờ xử lý.",
+        "Kiểm tra số lượng tại ô nguồn và ô đích.",
+        "Kiểm tra quyền xác nhận.",
+        "Cho phép hoặc từ chối chuyển."
+      ],
+      "extension_en": "Unauthorized role or already confirmed transfer → reject.",
+      "extension_vi": "Vai trò không đủ quyền hoặc phiếu đã xác nhận → từ chối.",
+      "frs": [
+        "FR-211",
+        "FR-212"
+      ]
+    },
+    {
+      "id": "UC-207",
+      "en": "Recommend FIFO Batches",
+      "vi": "Đề xuất lô theo FIFO",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "A SKU has eligible inventory across one or more batches.",
+      "pre_vi": "Có hàng hóa hợp lệ ở một hoặc nhiều lô.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Open Goods Issuing.",
+        "Select FIFO and enter the required quantity.",
+        "Review recommended batches and allocation.",
+        "Confirm the selection."
+      ],
+      "steps_vi": [
+        "Mở chức năng xuất hàng.",
+        "Chọn FIFO và số lượng cần xuất.",
+        "Xem thứ tự lô và phân bổ.",
+        "Xác nhận lựa chọn phù hợp."
+      ],
+      "extension_en": "Not enough eligible stock → no allocation; show an error.",
+      "extension_vi": "Không đủ hàng phù hợp → báo lỗi và không phân bổ.",
+      "frs": [
+        "FR-213",
+        "FR-214"
+      ]
+    },
+    {
+      "id": "UC-208",
+      "en": "Recommend FEFO Batches",
+      "vi": "Đề xuất lô theo FEFO",
+      "primary_en": "Warehouse Staff",
+      "primary_vi": "Nhân viên kho",
+      "secondary_en": "Inventory Ledger / Warehouse Manager (when applicable)",
+      "secondary_vi": "Sổ cái tồn kho / Quản lý kho (nếu áp dụng)",
+      "pre_en": "An expiry-controlled SKU has batches with known expiry dates.",
+      "pre_vi": "Có các lô hàng được theo dõi hạn sử dụng.",
+      "post_en": "A confirmed operation is recorded correctly; previews and drafts do not change inventory.",
+      "post_vi": "Giao dịch được xác nhận được ghi nhận đúng; phiếu nháp và xem trước không làm thay đổi tồn.",
+      "fail_en": "Inventory remains unchanged when the operation is rejected.",
+      "fail_vi": "Tồn kho không đổi nếu nghiệp vụ bị từ chối.",
+      "steps_en": [
+        "Open Goods Issuing.",
+        "Select FEFO and enter the required quantity.",
+        "Review the batches ordered by expiry date.",
+        "Select the recommended batches."
+      ],
+      "steps_vi": [
+        "Mở chức năng xuất hàng.",
+        "Chọn FEFO và số lượng cần xuất.",
+        "Xem thứ tự theo hạn dùng.",
+        "Chọn lô phù hợp để xuất."
+      ],
+      "extension_en": "Expired batch, missing expiry or insufficient eligible stock → skip/reject.",
+      "extension_vi": "Lô hết hạn, thiếu hạn dùng hoặc hàng không đủ → bỏ qua hoặc từ chối.",
+      "frs": [
+        "FR-215",
+        "FR-216"
+      ]
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "TC-201",
+      "fr": "FR-201",
+      "uc": "UC-201",
+      "en": "Create a Valid Receipt",
+      "vi": "Lập phiếu nhập hợp lệ",
+      "steps_en": [
+        "Open Goods Receiving.",
+        "Select a product and enter quantity and storage bin.",
+        "Enter batch and expiry if needed, then click Save."
+      ],
+      "steps_vi": [
+        "Mở chức năng Nhập kho.",
+        "Chọn sản phẩm và nhập số lượng, vị trí lưu trữ.",
+        "Nhập mã lô và hạn dùng nếu có, rồi nhấn Lưu."
+      ],
+      "expected_en": "The receipt is saved with the entered information.",
+      "expected_vi": "Phiếu nhập được lưu và hiển thị đúng thông tin.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-202",
+      "fr": "FR-202",
+      "uc": "UC-201",
+      "en": "Confirm a Receipt",
+      "vi": "Xác nhận nhập thành công",
+      "steps_en": [
+        "Open a valid receipt linked to a purchase order.",
+        "Check the quantity and click Confirm.",
+        "Review the quantity after confirmation."
+      ],
+      "steps_vi": [
+        "Mở phiếu nhập hợp lệ có đơn mua liên quan.",
+        "Kiểm tra số lượng và nhấn Xác nhận.",
+        "Xem số lượng sau khi xác nhận."
+      ],
+      "expected_en": "The receipt is confirmed and the incoming quantity is recorded once.",
+      "expected_vi": "Phiếu được xác nhận và hàng nhập được ghi nhận một lần.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-203",
+      "fr": "FR-202",
+      "uc": "UC-201",
+      "en": "Reject Excess Receiving",
+      "vi": "Nhập quá số lượng đơn mua",
+      "steps_en": [
+        "Choose a receipt linked to a purchase order.",
+        "Enter a quantity greater than the remaining ordered quantity.",
+        "Click Confirm."
+      ],
+      "steps_vi": [
+        "Chọn phiếu nhập gắn với đơn mua.",
+        "Nhập số lượng lớn hơn số còn được nhận.",
+        "Nhấn Xác nhận."
+      ],
+      "expected_en": "The system shows an error and does not confirm the receipt.",
+      "expected_vi": "Hệ thống báo lỗi và không xác nhận nhập.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-204",
+      "fr": "FR-203",
+      "uc": "UC-202",
+      "en": "Create a Valid Issue Note",
+      "vi": "Lập phiếu xuất hợp lệ",
+      "steps_en": [
+        "Open Goods Issuing.",
+        "Choose a product and enter quantity and destination.",
+        "Click Save."
+      ],
+      "steps_vi": [
+        "Mở chức năng Xuất kho.",
+        "Chọn hàng, nhập số lượng và nơi nhận.",
+        "Nhấn Lưu."
+      ],
+      "expected_en": "An issue note is created successfully.",
+      "expected_vi": "Phiếu xuất được tạo thành công.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-205",
+      "fr": "FR-204",
+      "uc": "UC-202",
+      "en": "Confirm Issue with Sufficient Stock",
+      "vi": "Xuất hàng khi đủ tồn",
+      "steps_en": [
+        "Choose an issue note with quantity within available stock.",
+        "Click Check and Confirm.",
+        "Review stock after the issue."
+      ],
+      "steps_vi": [
+        "Chọn phiếu xuất với số lượng không vượt tồn khả dụng.",
+        "Nhấn Kiểm tra và Xác nhận.",
+        "Xem số lượng tồn sau xuất."
+      ],
+      "expected_en": "The issue succeeds and stock decreases by the issued quantity.",
+      "expected_vi": "Xuất thành công và số lượng tồn giảm đúng mức.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-206",
+      "fr": "FR-204",
+      "uc": "UC-202",
+      "en": "Reject Issue Above Available Stock",
+      "vi": "Xuất nhiều hơn số tồn",
+      "steps_en": [
+        "Open an issue note.",
+        "Enter a quantity greater than available stock.",
+        "Click Confirm."
+      ],
+      "steps_vi": [
+        "Mở phiếu xuất.",
+        "Nhập số lượng lớn hơn tồn khả dụng.",
+        "Nhấn Xác nhận."
+      ],
+      "expected_en": "The system warns of insufficient stock and does not issue goods.",
+      "expected_vi": "Hệ thống báo không đủ hàng, không ghi nhận xuất.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-207",
+      "fr": "FR-205",
+      "uc": "UC-203",
+      "en": "Scan a Valid Product Code",
+      "vi": "Quét mã sản phẩm hợp lệ",
+      "steps_en": [
+        "Open Scan.",
+        "Scan a registered product QR code or barcode.",
+        "Review the displayed details."
+      ],
+      "steps_vi": [
+        "Mở chức năng Quét mã.",
+        "Quét mã QR/Barcode của sản phẩm có trong hệ thống.",
+        "Quan sát thông tin hiển thị."
+      ],
+      "expected_en": "The correct product is displayed.",
+      "expected_vi": "Hệ thống hiển thị đúng sản phẩm.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-208",
+      "fr": "FR-205",
+      "uc": "UC-203",
+      "en": "Reject Unknown or Ambiguous Scan",
+      "vi": "Từ chối mã không tồn tại hoặc mã lô trùng",
+      "steps_en": [
+        "Open Scan and scan UNKNOWN-404.",
+        "Confirm the product is not found.",
+        "In a test fixture, let SKU001 and SKU003 share LOT-SHARED; scan that lot code with no expected SKU.",
+        "Verify AMBIGUOUS and no count increment."
+      ],
+      "steps_vi": [
+        "Mở chức năng quét mã và quét UNKNOWN-404.",
+        "Kiểm tra thông báo không tìm thấy sản phẩm.",
+        "Trong dữ liệu thử, cho SKU001 và SKU003 cùng có LOT-SHARED; quét mã lô mà không chọn SKU trước.",
+        "Kiểm tra trạng thái AMBIGUOUS và bộ đếm không tăng."
+      ],
+      "expected_en": "Unknown code returns NOT_FOUND. Shared lot returns AMBIGUOUS and does not increase count.",
+      "expected_vi": "Mã lạ trả NOT_FOUND. Mã lô trùng trả AMBIGUOUS và không tăng số lượng đếm.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "UNKNOWN-404; LOT-SHARED shared by SKU001 and SKU003 in prepared test data.",
+      "input_vi": "UNKNOWN-404; LOT-SHARED dùng chung SKU001 và SKU003 trong dữ liệu thử.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-209",
+      "fr": "FR-206",
+      "uc": "UC-203",
+      "en": "Count Items by Scanning",
+      "vi": "Kiểm đếm bằng lượt quét",
+      "steps_en": [
+        "Open a product line in a receipt or issue note.",
+        "Scan the matching code multiple times.",
+        "Check the scanned count."
+      ],
+      "steps_vi": [
+        "Mở một dòng hàng trong phiếu nhập hoặc xuất.",
+        "Quét đúng mã hàng nhiều lần.",
+        "Kiểm tra số lượng đã quét."
+      ],
+      "expected_en": "The scanned count increases per scan; the transaction is not auto-confirmed.",
+      "expected_vi": "Số lượng quét được tăng theo lượt quét, không tự xác nhận giao dịch.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-210",
+      "fr": "FR-207",
+      "uc": "UC-204",
+      "en": "Create a Return Note",
+      "vi": "Lập phiếu trả hàng",
+      "steps_en": [
+        "Open Returns.",
+        "Select a previously issued product and enter quantity and reason.",
+        "Click Save."
+      ],
+      "steps_vi": [
+        "Mở chức năng Hàng trả lại.",
+        "Chọn hàng đã xuất, nhập số lượng và lý do trả.",
+        "Nhấn Lưu."
+      ],
+      "expected_en": "A return note is created.",
+      "expected_vi": "Phiếu nhận hàng trả lại được tạo.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-211",
+      "fr": "FR-207",
+      "uc": "UC-204",
+      "en": "Reject Zero-Quantity Return",
+      "vi": "Từ chối trả hàng có số lượng bằng 0",
+      "steps_en": [
+        "Open the Returned Goods screen.",
+        "Enter quantity 0 and a return reason.",
+        "Click Save."
+      ],
+      "steps_vi": [
+        "Mở mục Hàng trả lại.",
+        "Nhập số lượng 0 và lý do trả.",
+        "Nhấn Lưu."
+      ],
+      "expected_en": "An invalid quantity message is shown; no return is created.",
+      "expected_vi": "Hệ thống báo số lượng không hợp lệ và không tạo phiếu trả.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-212",
+      "fr": "FR-208",
+      "uc": "UC-204",
+      "en": "Quarantine Returned Goods",
+      "vi": "Đưa hàng trả lỗi vào khu cách ly",
+      "steps_en": [
+        "Create a draft return for SKU001 and LOT-OLD.",
+        "Choose Quarantine when confirming.",
+        "View available and quarantined stock."
+      ],
+      "steps_vi": [
+        "Tạo phiếu trả nháp cho SKU001 và LOT-OLD.",
+        "Chọn Cách ly khi xác nhận.",
+        "Xem số lượng khả dụng và cách ly."
+      ],
+      "expected_en": "The returned goods are quarantined and do not increase available stock.",
+      "expected_vi": "Hàng trả được ghi nhận vào tồn cách ly, không cộng vào tồn khả dụng.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-213",
+      "fr": "FR-209",
+      "uc": "UC-205",
+      "en": "Create a Bin Transfer Note",
+      "vi": "Lập phiếu chuyển ô chứa",
+      "steps_en": [
+        "Open Bin Transfer.",
+        "Choose source bin, destination bin, and quantity.",
+        "Click Save."
+      ],
+      "steps_vi": [
+        "Mở chức năng Chuyển vị trí.",
+        "Chọn ô nguồn, ô đích và nhập số lượng chuyển.",
+        "Nhấn Lưu."
+      ],
+      "expected_en": "The transfer note is saved with the correct source and destination.",
+      "expected_vi": "Phiếu chuyển được tạo với đúng ô nguồn và ô đích.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-214",
+      "fr": "FR-210",
+      "uc": "UC-205",
+      "en": "Confirm a Bin Transfer",
+      "vi": "Xác nhận chuyển hàng thành công",
+      "steps_en": [
+        "Open a valid transfer note.",
+        "Click Confirm Transfer.",
+        "Review quantities in both bins."
+      ],
+      "steps_vi": [
+        "Mở phiếu chuyển hợp lệ.",
+        "Nhấn Xác nhận chuyển.",
+        "Kiểm tra số lượng ở ô nguồn và ô đích."
+      ],
+      "expected_en": "Source stock decreases and destination stock increases equally; total stock stays unchanged.",
+      "expected_vi": "Ô nguồn giảm, ô đích tăng cùng số lượng; tổng kho không đổi.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-215",
+      "fr": "FR-210",
+      "uc": "UC-205",
+      "en": "Prevent Duplicate Transfer",
+      "vi": "Không chuyển trùng khi xác nhận lại",
+      "steps_en": [
+        "Choose an already confirmed transfer.",
+        "Try to confirm it again.",
+        "Recheck stock in both bins."
+      ],
+      "steps_vi": [
+        "Chọn phiếu chuyển đã xác nhận.",
+        "Thử nhấn xác nhận lần nữa.",
+        "Kiểm tra lại số lượng ở hai ô."
+      ],
+      "expected_en": "No additional stock movement is recorded.",
+      "expected_vi": "Không phát sinh thêm lần chuyển hàng.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-216",
+      "fr": "FR-211",
+      "uc": "UC-206",
+      "en": "Reject Transfer When Destination Bin Is Full",
+      "vi": "Từ chối chuyển khi ô đích không đủ chỗ",
+      "steps_en": [
+        "Create a transfer of 35 units of SKU001 LOT-NEW from A-01 to C-01.",
+        "Confirm the draft transfer.",
+        "Review the error and stock balance."
+      ],
+      "steps_vi": [
+        "Lập phiếu chuyển 35 sản phẩm SKU001, LOT-NEW từ A-01 đến C-01.",
+        "Xác nhận phiếu nháp.",
+        "Kiểm tra thông báo lỗi và tồn kho."
+      ],
+      "expected_en": "The destination has only 30 free units. Transfer is rejected and both bins remain unchanged.",
+      "expected_vi": "Ô đích chỉ còn chỗ cho 30 sản phẩm nên hệ thống từ chối; tồn ở cả hai ô không đổi.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-217",
+      "fr": "FR-212",
+      "uc": "UC-206",
+      "en": "Allow Warehouse Role to Confirm Transfer",
+      "vi": "Cho phép vai trò kho xác nhận chuyển hàng",
+      "steps_en": [
+        "Create a valid draft transfer.",
+        "Select demo role STAFF or MANAGER.",
+        "Click Confirm."
+      ],
+      "steps_vi": [
+        "Tạo phiếu chuyển nháp hợp lệ.",
+        "Chọn vai trò demo STAFF hoặc MANAGER.",
+        "Nhấn Xác nhận."
+      ],
+      "expected_en": "The transfer is confirmed (demo role check; not a secure login system).",
+      "expected_vi": "Phiếu được xác nhận (mô phỏng kiểm tra vai trò, chưa có đăng nhập bảo mật).",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-218",
+      "fr": "FR-212",
+      "uc": "UC-206",
+      "en": "Reject Guest Role for Transfer",
+      "vi": "Từ chối vai trò khách khi chuyển hàng",
+      "steps_en": [
+        "Create a valid draft transfer.",
+        "Select demo role GUEST.",
+        "Click Confirm."
+      ],
+      "steps_vi": [
+        "Tạo phiếu chuyển nháp hợp lệ.",
+        "Chọn vai trò demo GUEST.",
+        "Nhấn Xác nhận."
+      ],
+      "expected_en": "The operation is rejected and stock remains unchanged.",
+      "expected_vi": "Hệ thống từ chối và không làm thay đổi tồn kho.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-219",
+      "fr": "FR-213",
+      "uc": "UC-207",
+      "en": "FIFO Recommends the Oldest Batch",
+      "vi": "FIFO ưu tiên lô nhập sớm",
+      "steps_en": [
+        "Open an issue note for a product with multiple batches.",
+        "Select FIFO.",
+        "Review the recommended batch order."
+      ],
+      "steps_vi": [
+        "Mở phiếu xuất có nhiều lô cùng sản phẩm.",
+        "Chọn cách xuất FIFO.",
+        "Xem thứ tự lô đề xuất."
+      ],
+      "expected_en": "The earliest received eligible batch is recommended first.",
+      "expected_vi": "Lô nhập sớm nhất được ưu tiên.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-220",
+      "fr": "FR-213",
+      "uc": "UC-207",
+      "en": "FIFO Skips Blocked Batches",
+      "vi": "FIFO bỏ qua lô bị khóa",
+      "steps_en": [
+        "Open an issue note with a blocked or quarantined batch.",
+        "Select FIFO.",
+        "Review the recommended batches."
+      ],
+      "steps_vi": [
+        "Mở phiếu xuất có một lô bị khóa hoặc cách ly.",
+        "Chọn FIFO.",
+        "Xem danh sách lô đề xuất."
+      ],
+      "expected_en": "Blocked batches are not included in the recommendation.",
+      "expected_vi": "Lô bị khóa không được đề xuất xuất hàng.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-221",
+      "fr": "FR-214",
+      "uc": "UC-207",
+      "en": "FIFO Allocates Across Batches",
+      "vi": "FIFO lấy hàng từ nhiều lô",
+      "steps_en": [
+        "Open an issue requiring more items than the oldest batch contains.",
+        "Select FIFO and review allocation.",
+        "Confirm if the stock is sufficient."
+      ],
+      "steps_vi": [
+        "Mở phiếu xuất có lượng cần xuất nhiều hơn lượng của lô cũ nhất.",
+        "Chọn FIFO và xem phân bổ.",
+        "Xác nhận nếu số lượng hợp lệ."
+      ],
+      "expected_en": "The system uses the oldest batch first, then the next one.",
+      "expected_vi": "Hệ thống dùng hết lô cũ trước rồi lấy tiếp lô sau.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-222",
+      "fr": "FR-215",
+      "uc": "UC-208",
+      "en": "FEFO Recommends the Nearest Expiry",
+      "vi": "FEFO ưu tiên lô gần hết hạn",
+      "steps_en": [
+        "Open an issue note with batches having different expiry dates.",
+        "Select FEFO.",
+        "Review the recommended batch order."
+      ],
+      "steps_vi": [
+        "Mở phiếu xuất có nhiều lô khác hạn sử dụng.",
+        "Chọn FEFO.",
+        "Xem thứ tự lô đề xuất."
+      ],
+      "expected_en": "The eligible batch with the nearest expiry date is recommended first.",
+      "expected_vi": "Lô hợp lệ có hạn dùng gần nhất được ưu tiên.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-223",
+      "fr": "FR-215",
+      "uc": "UC-208",
+      "en": "FEFO Skips Expired Batches",
+      "vi": "FEFO bỏ qua lô hết hạn",
+      "steps_en": [
+        "Open an issue note containing an expired batch.",
+        "Select FEFO.",
+        "Review the recommended batches."
+      ],
+      "steps_vi": [
+        "Mở phiếu xuất có lô đã quá hạn.",
+        "Chọn FEFO.",
+        "Xem các lô được đề xuất."
+      ],
+      "expected_en": "Expired batches are excluded from the recommendation.",
+      "expected_vi": "Lô hết hạn không được lựa chọn để xuất.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    },
+    {
+      "id": "TC-224",
+      "fr": "FR-216",
+      "uc": "UC-208",
+      "en": "FEFO Handles Equal Expiry Dates",
+      "vi": "FEFO xử lý hai lô cùng hạn",
+      "steps_en": [
+        "Open an issue note for two batches with the same expiry date but different receiving dates.",
+        "Select FEFO and enter the required quantity.",
+        "Review batch order and allocated quantities."
+      ],
+      "steps_vi": [
+        "Mở phiếu xuất có hai lô cùng hạn dùng nhưng ngày nhập khác nhau.",
+        "Chọn FEFO và số lượng cần xuất.",
+        "Xem thứ tự và lượng phân bổ cho từng lô."
+      ],
+      "expected_en": "The earlier received batch is used first; the remaining quantity comes from the other batch.",
+      "expected_vi": "Lô nhập sớm được lấy trước; nếu không đủ thì lấy tiếp lô còn lại.",
+      "pre_en": "Demo system is running with seeded products and warehouse bins.",
+      "pre_vi": "Demo đang chạy và đã có dữ liệu mẫu về hàng hóa và ô chứa.",
+      "input_en": "Use the corresponding screen with demo products; follow the scenario steps.",
+      "input_vi": "Chọn chức năng tương ứng và sử dụng dữ liệu mẫu theo từng bước.",
+      "status": "Not Run",
+      "actual": "",
+      "executed_by": ""
+    }
+  ],
+  "nfr": [
+    {
+      "id": "NFR-201",
+      "en": "On a local demo dataset, a normal inventory search should return within 2 seconds (to be measured during integration).",
+      "vi": "Với dữ liệu mẫu tại máy, thao tác xem tồn kho thông thường cần phản hồi trong 2 giây (sẽ đo khi tích hợp).",
+      "method_en": "Stopwatch on final integrated application",
+      "method_vi": "Đo thời gian trên chương trình đã tích hợp"
+    },
+    {
+      "id": "NFR-202",
+      "en": "A confirmed stock operation must not change stock more than once, even if confirmation is repeated.",
+      "vi": "Một giao dịch đã xác nhận không được thay đổi tồn kho nhiều lần, kể cả khi xác nhận lặp.",
+      "method_en": "Repeat-confirm scenario and compare stock",
+      "method_vi": "Xác nhận lặp rồi so sánh tồn kho"
+    }
+  ],
+  "stakeholders": [
+    {
+      "id": "STK-201",
+      "en": "Warehouse Staff",
+      "vi": "Nhân viên kho",
+      "need_en": "Fast, clear receiving/issuing/scanning workflows",
+      "need_vi": "Nhập, xuất và quét mã nhanh, dễ hiểu"
+    },
+    {
+      "id": "STK-202",
+      "en": "Warehouse Manager",
+      "vi": "Quản lý kho",
+      "need_en": "Reliable movements, approval policies and product traceability",
+      "need_vi": "Điều chuyển chính xác, phân quyền và truy vết hàng"
+    },
+    {
+      "id": "STK-203",
+      "en": "Inventory Controller",
+      "vi": "Nhân viên quản lý tồn kho",
+      "need_en": "One recorded movement per confirmed action",
+      "need_vi": "Mỗi giao dịch xác nhận được ghi nhận đúng một lần"
+    }
+  ],
+  "change_log": [
+    {
+      "id": "CR-201",
+      "en": "Include batch and expiry fields in receiving",
+      "vi": "Bổ sung mã lô và hạn sử dụng khi nhập",
+      "affected": [
+        "FR-201",
+        "TC-201"
+      ],
+      "type": "Draft refinement"
+    },
+    {
+      "id": "CR-202",
+      "en": "Check destination-bin capacity for transfers",
+      "vi": "Bổ sung kiểm tra sức chứa ô đích",
+      "affected": [
+        "FR-211",
+        "TC-216"
+      ],
+      "type": "Draft refinement"
+    },
+    {
+      "id": "CR-203",
+      "en": "Prevent wrong SKU selection for ambiguous lot-code scans",
+      "vi": "Tránh tự chọn nhầm SKU khi quét mã lô trùng giữa nhiều sản phẩm",
+      "affected": [
+        "FR-205",
+        "UC-203",
+        "TC-207",
+        "TC-208"
+      ],
+      "type": "Local demo defect correction; group approval pending"
+    }
+  ],
+  "assumptions_en": [
+    "Products, bins and approved purchase orders are seeded locally to simulate Module 1.",
+    "Inventory movements are recorded in a local ledger as a stand-in for Module 3.",
+    "Authorization is a selected demo role only; secure login will be designed by the group.",
+    "QR/barcode values are entered using a scanner keyboard or typed; camera scanning is not implemented.",
+    "The group has not run end-to-end testing on the integrated application."
+  ],
+  "assumptions_vi": [
+    "Danh mục hàng, vị trí và đơn mua được tạo sẵn để mô phỏng Module 1.",
+    "Biến động kho được ghi vào sổ cái cục bộ nhằm mô phỏng kết nối Module 3.",
+    "Quyền trong demo chỉ là lựa chọn vai trò; đăng nhập bảo mật để nhóm thống nhất sau.",
+    "Mã QR/Barcode được nhập bằng bàn phím hoặc máy quét dạng bàn phím; chưa quét camera.",
+    "Nhóm chưa thực hiện kiểm thử end-to-end trên ứng dụng tích hợp."
+  ]
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block heading %}{{ {'receipts':'Goods Receiving','issues':'Goods Issuing','returns':'Returned Goods','transfers':'Internal Bin Transfer'}[kind] }}{% endblock %}{% block content %}
+<section><h2>Create draft</h2><p class="hint">Step 1: Create a draft. Step 2: Confirm it in the table below. Stock changes only on confirmation.</p>
+<form method="post" action="{{url_for('operations',kind=kind)}}" class="form-grid">
+<label>Product SKU<select name="sku" required>{% for p in products %}<option value="{{p.sku}}">{{p.sku}} — {{p.name}}</option>{% endfor %}</select></label>
+<label>Quantity<input type="number" min="1" step="1" name="qty" value="5" required></label>
+{% if kind=='receipts' %}
+<label>Approved purchase order<select name="po">{% for po in orders %}<option value="{{po.po}}">{{po.po}} ({{po.sku}}, remaining {{po.ordered_qty-po.received_qty}})</option>{% endfor %}</select></label>
+<label>Lot<input name="lot" value="LOT-DEMO" required></label><label>Destination bin<select name="bin_id">{% for b in bins %}<option>{{b.bin_id}}</option>{% endfor %}</select></label>
+<label>Expiry date (required for expiry-controlled products)<input type="date" name="expiry_date" value="2027-12-31"></label>
+{% elif kind=='issues' %}<label>Destination/customer<input name="destination" value="Customer order" required></label><label>Picking method<select name="method"><option>FIFO</option><option>FEFO</option></select></label>
+{% elif kind=='returns' %}<label>Existing lot<input name="lot" value="LOT-OLD" required></label><label>Return bin<select name="bin_id">{% for b in bins %}<option>{{b.bin_id}}</option>{% endfor %}</select></label><label>Return reason<input name="reason" value="Customer return" required></label>
+{% elif kind=='transfers' %}<label>Existing lot<input name="lot" value="LOT-OLD" required></label><label>Source bin<select name="source_bin">{% for b in bins %}<option>{{b.bin_id}}</option>{% endfor %}</select></label><label>Destination bin<select name="dest_bin">{% for b in bins %}<option {% if b.bin_id=='B-01' %}selected{% endif %}>{{b.bin_id}}</option>{% endfor %}</select></label>
+{% endif %}
+<button type="submit">Create draft</button></form></section>
+<section><h2>Records</h2><div class="scroll"><table><tr><th>ID</th><th>SKU</th><th>Qty</th><th>Status</th><th>Details</th><th>Action</th></tr>
+{% for r in rows %}<tr><td>{{r.id}}</td><td>{{r.sku}}</td><td>{{r.qty}}</td><td><span class="tag">{{r.status}}</span></td>
+<td>{% if kind=='receipts' %}{{r.po}} · {{r.lot}} · {{r.bin_id}}{% elif kind=='issues' %}{{r.method}}{% elif kind=='returns' %}{{r.lot}} · {{r.reason}}{% else %}{{r.lot}}: {{r.source_bin}} → {{r.dest_bin}}{% endif %}</td>
+<td>{% if r.status=='DRAFT' %}<form method="post" action="{{url_for('confirm',kind=kind,item_id=r.id)}}" class="action-form">
+{% if kind=='transfers' %}<select name="role"><option value="STAFF">Staff</option><option value="MANAGER">Manager</option><option value="GUEST">Guest (blocked)</option></select>{% endif %}
+{% if kind=='returns' %}<select name="inspection"><option value="AVAILABLE">Accepted</option><option value="QUARANTINE">Quarantine</option></select>{% endif %}
+<button type="submit" class="small">Confirm</button></form>{% else %}Done{% endif %}</td></tr>{% endfor %}</table></div></section>
+{% if kind=='issues' %}<p class="hint">After confirming an issue, its allocation is saved with the record (FIFO or FEFO). Use the Preview page to inspect the sequence before confirming.</p>{% endif %}{% endblock %}

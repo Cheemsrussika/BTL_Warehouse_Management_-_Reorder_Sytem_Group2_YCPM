@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ app_name }}</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><aside><h2>📦 WIRS</h2><small>Warehouse Inventory &amp;<br>Reorder System</small><p class="subtitle">Module 2 · Demo</p>
+<a href="{{url_for('dashboard')}}">📊 Dashboard</a>
+<a href="{{url_for('operations',kind='receipts')}}">📥 Goods Receiving</a>
+<a href="{{url_for('operations',kind='issues')}}">📤 Goods Issuing</a>
+<a href="{{url_for('scan')}}">▦ QR / Barcode</a>
+<a href="{{url_for('operations',kind='returns')}}">↩️ Goods Returns</a>
+<a href="{{url_for('operations',kind='transfers')}}">↔️ Bin Transfers</a>
+<a href="{{url_for('preview')}}">⏳ FIFO / FEFO</a>
+<a href="{{url_for('stock_api')}}">🔌 Stock API</a>
+</aside><main><header><h1>{% block heading %}Warehouse Operations{% endblock %}</h1><p>Academic demonstration • Local SQLite database</p></header>
+{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}{% for cat, msg in messages %}<div class="alert {{cat}}">{{msg}}</div>{% endfor %}{% endif %}{% endwith %}
+{% block content %}{% endblock %}<footer>Software Requirements · Module 2 · Demo only. No authentication or production integration.</footer></main></body></html>

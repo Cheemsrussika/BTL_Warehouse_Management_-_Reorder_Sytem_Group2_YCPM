@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block heading %}QR / Barcode Scanning{% endblock %}{% block content %}
+<section><h2>Scan or enter a code</h2><p class="hint">This demo accepts keyboard/barcode-scanner text (SKU, barcode or lot). A real camera scanner can be integrated later.</p>
+<form method="post" class="form-grid"><label>Scanned code<input name="code" placeholder="SKU001, LOT-OLD or 8930000000001" required></label>
+<label>Expected SKU (optional)<select name="expected_sku"><option value="">No restriction</option>{% for p in products %}<option>{{p.sku}}</option>{% endfor %}</select></label>
+<label>Count task (optional)<input name="task_id" placeholder="RECEIVE-001"></label><label>Expected count (optional)<input name="expected_qty" type="number" min="1" placeholder="10"></label><button>Check scan / Count +1</button></form></section>
+<section><h2>Count totals</h2><table><tr><th>Task</th><th>SKU</th><th>Scanned</th><th>Expected</th><th>Progress</th></tr>{% for s in counts %}<tr><td>{{s.task_id}}</td><td>{{s.sku}}</td><td>{{s.count}}</td><td>{{s.expected_qty or "—"}}</td><td>{% if s.expected_qty %}{{"Complete" if s.count==s.expected_qty else ("Over" if s.count>s.expected_qty else "In progress")}}{% else %}Unspecified{% endif %}</td></tr>{% endfor %}</table></section>
+<section><h2>Scan history</h2><table><tr><th>Code</th><th>Expected</th><th>Detected</th><th>Result</th></tr>{% for s in history %}<tr><td>{{s.code}}</td><td>{{s.expected_sku or '—'}}</td><td>{{s.sku or '—'}}</td><td>{{s.result}}</td></tr>{% endfor %}</table></section>{% endblock %}
